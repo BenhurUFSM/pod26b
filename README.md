@@ -1,7 +1,5 @@
 # pod26b
 
-# l226b
-
 Disciplina de Pesquisa e Ordenação de Dados, 2º semestre de 2026
 ELC1068 DLSC/CT/UFSM\
 professor: Benhur Stein ([benhur+pod26b@inf.ufsm.br](mailto:benhur%2bpod26b@inf.ufsm.br))\

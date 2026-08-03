@@ -108,3 +108,23 @@ void ordena_insercao(int n, dado_t v[n])
 Dá para otimizar um pouco realizando a cópia para `salvo` só se houver necessidade de movimentação de dados.
 
 Uma variação, chamada "ordenação shell" consiste em aplicar a ordenação por inserção em dados que estão a uma certa distância entre si, e usar distâncias cada vez menores.
+```c
+void ordena_shell(int n, dado_t v[n])
+{
+  for (h) { // para cada distância h, que vai diminuindo, a última tem que ser 1
+    for (int i = h; i < n; i++) {
+      // o dado na posição i é o próximo a ser inserido, salva ele
+      dado_t salvo;
+      copia(&salvo, &v[i]);
+      // avança os dados antes de i que são maiores que o dado a inserir
+      int pos = i;
+      while (pos > h - 1 && !chaves_em_ordem(v[pos - h].chave, salvo.chave)) {
+        copia(&v[pos], &v[pos - h]);
+        pos -= h;
+      }
+      // copia o dado salvo para sua posição (se já não tiver lá)
+      if (pos != i) copia(&v[pos], &salvo);
+    }
+  }
+}
+```

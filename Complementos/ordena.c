@@ -178,15 +178,15 @@ void ordena_selecao(int n, dado_t v[n])
   //   todos maiores que os ordenados
   for (int i = 0; i < n - 1; i++) {
     // procura onde está o menor elemento à partir da posição i
-    int menor = i;
+    int pos_menor = i;
     for (int j = i + 1; j < n; j++) {
-      if (!em_ordem_v(v, menor, j)) {
-        menor = j;
+      if (!em_ordem_v(v, pos_menor, j)) {
+        pos_menor = j;
       }
     }
     // troca o menor elemento com o que está na posição i,
     //   se já não estiver aí
-    if (menor != i) troca(v, menor, i);
+    if (pos_menor != i) troca(v, pos_menor, i);
   }
 }
 
@@ -226,18 +226,18 @@ void ordena_shell(int n, dado_t v[n])
 {
   // as distâncias a considerar (devem ter trabalhado bastante
   //   para chegar a esses números...)
-  int hs[] = { 701, 301, 132, 57, 23, 10, 4, 1, -1 };
-  for (int ih = 0; hs[ih] >= 1; ih++) {
-    int h = hs[ih];
-    for (int i = h; i < n; i++) {
+  int dists[] = { 701, 301, 132, 57, 23, 10, 4, 1, -1 };
+  for (int idist = 0; dists[idist] > 0; idist++) {
+    int dist = dists[idist];
+    for (int i = dist; i < n; i++) {
       // o dado na posição i é o próximo a ser inserido, salva ele
       dado_t salvo;
       copia(&salvo, &v[i]);
       // avança os dados antes de i que são maiores que o dado a inserir
       int pos = i;
-      while (pos > h - 1 && !em_ordem(&v[pos - h], &salvo)) {
-        copia(&v[pos], &v[pos - h]);
-        pos -= h;
+      while (pos > dist - 1 && !em_ordem(&v[pos - dist], &salvo)) {
+        copia(&v[pos], &v[pos - dist]);
+        pos -= dist;
       }
       // copia o dado salvo para sua posição (se já não tiver lá)
       if (pos != i) copia(&v[pos], &salvo);
@@ -267,11 +267,11 @@ void ordena_quick(int n, dado_t v[n])
   // particiona o vetor em duas partições, com o pivô entre elas,
   //   a partição esquerda contendo dados menores que o pivô e a direita
   //   com os dados maiores
-  int pivô = quick_particiona(n, v);
+  int pos_pivô = quick_particiona(n, v);
 
   // ordena cada partição (o pivô tá no lugar certo)
-  ordena_quick(pivô, v);
-  ordena_quick(n - pivô - 1, v + pivô + 1);
+  ordena_quick(pos_pivô, v);
+  ordena_quick(n - pos_pivô - 1, v + pos_pivô + 1);
 }
 
 // particiona o vetor v em 2 partições.
@@ -283,18 +283,18 @@ int quick_particiona(int n, dado_t v[n])
 {
   // escolhe o primeiro elemento do vetor para ser o pivô.
   // essa escolha é simples, mas é péssima se v já estiver ordenado...
-  int pivô = 0;
+  int pos_pivô = 0;
 
   // antes de i ficam os que são <= pivô
   // depois de j ficam os que são > pivô
   // entre i e j, os que ainda não se sabe
-  int i = pivô + 1;
+  int i = pos_pivô + 1;
   int j = n - 1;
   while (i <= j) {
-    // avança o i sobre os que já estão ok
-    while (i <= j && em_ordem_v(v, i, pivô)) i++;
-    // recua o j sobre os que já estão ok
-    while (i <= j && !em_ordem_v(v, j, pivô)) j--;
+    // avança o i até achar um que não pode ficar antes do pivô
+    while (i <= j && em_ordem_v(v, i, pos_pivô)) i++;
+    // recua o j até achar um que não pode ficar depois do pivô
+    while (i <= j && !em_ordem_v(v, j, pos_pivô)) j--;
     if (i < j) {
       // em i tem um que é maior que o pivô, em j um que é <=
       troca(v, i, j);
@@ -304,12 +304,12 @@ int quick_particiona(int n, dado_t v[n])
   }
 
   // em j está o último que é <= pivô -> coloca o pivô aí
-  if (j != pivô) {
-    troca(v, pivô, j);
-    pivô = j;
+  if (j != pos_pivô) {
+    troca(v, pos_pivô, j);
+    pos_pivô = j;
   }
 
-  return pivô;
+  return pos_pivô;
 }
 
 // {{{2 ordenação merge

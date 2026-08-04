@@ -69,4 +69,4 @@ Os assuntos vistos em aula serão listados aqui.
 
 |     N |     prazo | descrição
 | ----: | --------: | :-----------
-| t1    |           | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)
+| t1    | 12ago     | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)

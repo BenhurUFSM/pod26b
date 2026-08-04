@@ -4,9 +4,10 @@ Disciplina de Pesquisa e Ordenação de Dados, 2º semestre de 2026
 ELC1068 DLSC/CT/UFSM\
 professor: Benhur Stein ([benhur+pod26b@inf.ufsm.br](mailto:benhur%2bpod26b@inf.ufsm.br))\
 terças e quintas, 14h30, turma SI\
-sala 255, anexo A do CT
+sala 255, anexo A do CT\
+alunos: [planilha](https://docs.google.com/spreadsheets/d/1JzLYYH0k_aYOZ6918-5DghNZpLkP6mJTy2nJ5AVTGeM/edit?usp=sharing)
 
-arquivo rascunho: https://docs.google.com/document/d/1N21tqLkZEnALHvoJXw3apZegu-AAAba2f8wwZH7tIng/edit?usp=sharing
+arquivo [rascunho](https://docs.google.com/document/d/1N21tqLkZEnALHvoJXw3apZegu-AAAba2f8wwZH7tIng/edit?usp=sharing)
 
 ## Desenvolvimento da disciplina
 

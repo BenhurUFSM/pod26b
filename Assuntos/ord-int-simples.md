@@ -103,6 +103,14 @@ Para realizar a inserção, desloca para a direita os dados já ordenados que s�
 Em C:
 
 ```c
+// copia o dado apontado por p2
+//   para o local apontado por p1
+void copia(dado_t *p1, dado_t *p2);
+
+// diz se está ok o dado apontado por p1
+//   estar antes do dado apontado por p2
+bool em_ordem(dado_t *p1, dado_t *p2);
+
 void ordena_insercao(int n, dado_t v[n])
 {
   // dados antes de i estão ordenados; de i em diante não
@@ -112,7 +120,7 @@ void ordena_insercao(int n, dado_t v[n])
     copia(&salvo, &v[i]);
     // avança os dados antes de i que são maiores que o dado a inserir
     int pos = i;
-    while (pos > 0 && !chaves_em_ordem(v[pos - 1].chave, salvo.chave)) {
+    while (pos > 0 && !em_ordem(&v[pos - 1], &salvo)) {
       copia(&v[pos], &v[pos - 1]);
       pos--;
     }
@@ -140,7 +148,7 @@ void ordena_shell(int n, dado_t v[n])
       copia(&salvo, &v[i]);
       // avança os dados antes de i que são maiores que o dado a inserir
       int pos = i;
-      while (pos > h - 1 && !chaves_em_ordem(v[pos - h].chave, salvo.chave)) {
+      while (pos > h - 1 && !em_ordem(&v[pos - h], &salvo)) {
         copia(&v[pos], &v[pos - h]);
         pos -= h;
       }

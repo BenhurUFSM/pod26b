@@ -245,143 +245,6 @@ void ordena_shell(int n, dado_t v[n])
   }
 }
 
-// {{{2 ordenação quick
-//
-// escolhe um elemento para ser o pivô, coloca todos os elementos
-//   do vetor que são menores (ou iguais) a ele no início do vetor
-//   e todos os que são maiores no final, e o pivô entre eles.
-// com isso, o pivô está no local certo, os dados menores estão do
-//   lado certo e os maiores também, só falta ordenar os dados de
-//   cada lado.
-// usa então a mesma função, de forma recursiva, para ordenar cada
-//   lado.
-
-// funções auxiliares
-int quick_particiona(int n, dado_t v[n]);
-
-void ordena_quick(int n, dado_t v[n])
-{
-  // se o vetor tiver menos de 2 elementos, já está ordenado
-  if (n < 2) return;
-
-  // particiona o vetor em duas partições, com o pivô entre elas,
-  //   a partição esquerda contendo dados menores que o pivô e a direita
-  //   com os dados maiores
-  int pos_pivô = quick_particiona(n, v);
-
-  // ordena cada partição (o pivô tá no lugar certo)
-  ordena_quick(pos_pivô, v);
-  ordena_quick(n - pos_pivô - 1, v + pos_pivô + 1);
-}
-
-// particiona o vetor v em 2 partições.
-// escolhe um valor no vetor para ser o pivô, e coloca todos
-//   os valores menores que o pivô antes dele, e todos os maiores
-//   depois do pivô.
-// retorna a posição do pivô
-int quick_particiona(int n, dado_t v[n])
-{
-  // escolhe o primeiro elemento do vetor para ser o pivô.
-  // essa escolha é simples, mas é péssima se v já estiver ordenado...
-  int pos_pivô = 0;
-
-  // antes de i ficam os que são <= pivô
-  // depois de j ficam os que são > pivô
-  // entre i e j, os que ainda não se sabe
-  int i = pos_pivô + 1;
-  int j = n - 1;
-  while (i <= j) {
-    // avança o i até achar um que não pode ficar antes do pivô
-    while (i <= j && em_ordem_v(v, i, pos_pivô)) i++;
-    // recua o j até achar um que não pode ficar depois do pivô
-    while (i <= j && !em_ordem_v(v, j, pos_pivô)) j--;
-    if (i < j) {
-      // em i tem um que é maior que o pivô, em j um que é <=
-      troca(v, i, j);
-      i++;
-      j--;
-    }
-  }
-
-  // em j está o último que é <= pivô -> coloca o pivô aí
-  if (j != pos_pivô) {
-    troca(v, pos_pivô, j);
-    pos_pivô = j;
-  }
-
-  return pos_pivô;
-}
-
-// {{{2 ordenação merge
-//
-// a ideia é ordenar à partir de uma operação (merge) que junta
-//   dois vetores ordenados em um só. Para isso, move um dado por
-//   vez, do vetor que contém o menor valor para o vetor destino.
-// usa essa operação repetidas vezes, inicialmente juntando vetores
-//   de tamanho 1 (que estão obviamente ordenados), gerando vetores
-//   de tamanho 2. Depois, junta esses vetores de tamanho 2 em
-//   vetores de tamanho 4 e assim sucessivamente até que só reste
-//   um vetor, de tamanho n, com todos os dados ordenados.
-
-// função auxiliar
-void merge(dado_t *v, int p1, int p2, int u2, dado_t *w);
-
-void ordena_merge(int n, dado_t v[n])
-{
-  // aloca um vetor auxiliar de mesmo tamanho que v
-  dado_t *w = malloc(n * sizeof(dado_t));
-  assert(w != NULL);
-
-  // começa com n partições de tamanho 1 (que são naturalmente ordenadas),
-  //   mistura duas a duas obtendo partições ordenadas com o dobro do
-  //   tamanho, até ter uma só partição ordenada, de tamanho n
-  for (int t = 1; t < n; t *= 2) {
-    // mistura duas partições vizinhas, ordenadas, de tamanho t
-    for (int i = 0; i < n; i += 2 * t) {
-      // a primeira partição inicia na posição i, a segunda na posição j
-      int j = i + t;
-      // no final do vetor, pode ser que não tenha 2 partições
-      if (j >= n) break;
-      // u é a última posição da segunda partição
-      int u = j + t - 1;
-      if (u > n - 1) u = n - 1;
-      // faz a junção
-      merge(v, i, j, u, w);
-    }
-  }
-  free(w);
-}
-
-// no vetor v tem duas partições ordenadas, uma nas posições p1 até
-//   p2-1, e outra nas posições p2 até u2.
-// esta função mistura essas partições, produzindo uma única partição
-//   com os mesmos dados, ordenados, nas posições p1 até u2.
-// usa o vetor w como espaço auxiliar (ele tem o mesmo tamanho de v).
-void merge(dado_t *v, int p1, int p2, int u2, dado_t *w)
-{
-  int u1 = p2 - 1;      // última posição da partição 1
-  int i1 = p1;          // índice que vai varrer a partição 1
-  int i2 = p2;          // índice que vai varrer a partição 2
-  int n = u2 - p1 + 1;  // número total de itens nas duas partições
-  int iv, iw;           // índices no vetor v e w
-
-  // copia os n dados de v para w, em ordem
-  for (iw = 0; iw < n; iw++) {
-    // copia para w[iw] o menor entre v[i1] e v[i2]
-    if (i1 <= u1 && (i2 > u2 || em_ordem_v(v, i1, i2))) iv = i1++;
-    else iv = i2++;
-    copia(&w[iw], &v[iv]);
-  }
-
-  // copia os n dados ordenados, de w para v
-  iv = p1;
-  for (iw = 0; iw < n; iw++) {
-    copia(&v[iv], &w[iw]);
-    iv++;
-  }
-}
-
-
 // {{{2 ordenação heap
 //
 // como ordenação por seleção, divide o vetor em duas partes, no início
@@ -469,6 +332,144 @@ void heap_constroi(int n, dado_t v[n])
   for (int i = n / 2 - 1; i >= 0; i--) {
     heap_ajeita(n, v, i);
   }
+}
+
+// {{{2 ordenação merge
+//
+// a ideia é ordenar à partir de uma operação (merge) que junta
+//   dois vetores ordenados em um só. Para isso, move um dado por
+//   vez, do vetor que contém o menor valor para o vetor destino.
+// usa essa operação repetidas vezes, inicialmente juntando vetores
+//   de tamanho 1 (que estão obviamente ordenados), gerando vetores
+//   de tamanho 2. Depois, junta esses vetores de tamanho 2 em
+//   vetores de tamanho 4 e assim sucessivamente até que só reste
+//   um vetor, de tamanho n, com todos os dados ordenados.
+
+// função auxiliar
+void merge(dado_t *v, int p1, int p2, int u2, dado_t *w);
+
+void ordena_merge(int n, dado_t v[n])
+{
+  // aloca um vetor auxiliar de mesmo tamanho que v
+  dado_t *w = malloc(n * sizeof(dado_t));
+  assert(w != NULL);
+
+  // começa com n partições de tamanho 1 (que são naturalmente ordenadas),
+  //   mistura duas a duas obtendo partições ordenadas com o dobro do
+  //   tamanho, até ter uma só partição ordenada, de tamanho n
+  for (int t = 1; t < n; t *= 2) {
+    // mistura duas partições vizinhas, ordenadas, de tamanho t
+    for (int i = 0; i < n; i += 2 * t) {
+      // a primeira partição inicia na posição i, a segunda na posição j
+      int j = i + t;
+      // no final do vetor, pode ser que não tenha 2 partições
+      if (j >= n) break;
+      // u é a última posição da segunda partição
+      int u = j + t - 1;
+      if (u > n - 1) u = n - 1;
+      // faz a junção
+      merge(v, i, j, u, w);
+    }
+  }
+  free(w);
+}
+
+// no vetor v tem duas partições ordenadas, uma nas posições p1 até
+//   p2-1, e outra nas posições p2 até u2.
+// esta função mistura essas partições, produzindo uma única partição
+//   com os mesmos dados, ordenados, nas posições p1 até u2.
+// usa o vetor w como espaço auxiliar (ele tem o mesmo tamanho de v).
+void merge(dado_t *v, int p1, int p2, int u2, dado_t *w)
+{
+  int u1 = p2 - 1;      // última posição da partição 1
+  int i1 = p1;          // índice que vai varrer a partição 1
+  int i2 = p2;          // índice que vai varrer a partição 2
+  int n = u2 - p1 + 1;  // número total de itens nas duas partições
+  int iv, iw;           // índices no vetor v e w
+
+  // copia os n dados de v para w, em ordem
+  for (iw = 0; iw < n; iw++) {
+    // copia para w[iw] o menor entre v[i1] e v[i2]
+    if (i1 <= u1 && (i2 > u2 || em_ordem_v(v, i1, i2))) iv = i1++;
+    else iv = i2++;
+    copia(&w[iw], &v[iv]);
+  }
+
+  // copia os n dados ordenados, de w para v
+  iv = p1;
+  for (iw = 0; iw < n; iw++) {
+    copia(&v[iv], &w[iw]);
+    iv++;
+  }
+}
+
+
+// {{{2 ordenação quick
+//
+// escolhe um elemento para ser o pivô, coloca todos os elementos
+//   do vetor que são menores (ou iguais) a ele no início do vetor
+//   e todos os que são maiores no final, e o pivô entre eles.
+// com isso, o pivô está no local certo, os dados menores estão do
+//   lado certo e os maiores também, só falta ordenar os dados de
+//   cada lado.
+// usa então a mesma função, de forma recursiva, para ordenar cada
+//   lado.
+
+// funções auxiliares
+int quick_particiona(int n, dado_t v[n]);
+
+void ordena_quick(int n, dado_t v[n])
+{
+  // se o vetor tiver menos de 2 elementos, já está ordenado
+  if (n < 2) return;
+
+  // particiona o vetor em duas partições, com o pivô entre elas,
+  //   a partição esquerda contendo dados menores que o pivô e a direita
+  //   com os dados maiores
+  int pos_pivô = quick_particiona(n, v);
+
+  // ordena cada partição (o pivô tá no lugar certo)
+  ordena_quick(pos_pivô, v);
+  ordena_quick(n - pos_pivô - 1, v + pos_pivô + 1);
+}
+
+// escolhe um pivô e particiona o vetor v em 3 subvetores:
+//   - à esquerda os dados menores que o pivô, 
+//   - à direita os dados maiores que o pivô,
+//   - entre eles o pivô
+// retorna a posição do pivô
+int quick_particiona(int n, dado_t v[n])
+{
+  // escolhe o primeiro elemento do vetor para ser o pivô.
+  // essa escolha é simples, mas é péssima se v já estiver ordenado...
+  // se escolher um dado em outra posição, ele deve ser colocado na posição 0
+  int pos_pivô = 0;
+
+  // antes de i ficam os que são <= pivô
+  // depois de j ficam os que são > pivô
+  // entre i e j, os que ainda não se sabe
+  int i = pos_pivô + 1;
+  int j = n - 1;
+  while (i <= j) {
+    // avança o i até achar um que não pode ficar antes do pivô
+    while (i <= j && em_ordem_v(v, i, pos_pivô)) i++;
+    // recua o j até achar um que não pode ficar depois do pivô
+    while (i <= j && !em_ordem_v(v, j, pos_pivô)) j--;
+    if (i < j) {
+      // em i tem um que é maior que o pivô, em j um que é <=
+      troca(v, i, j);
+      i++;
+      j--;
+    }
+  }
+
+  // em j está o último que é <= pivô -> coloca o pivô aí
+  if (j != pos_pivô) {
+    troca(v, pos_pivô, j);
+    pos_pivô = j;
+  }
+
+  return pos_pivô;
 }
 
 // {{{1 cronômetro

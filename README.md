@@ -64,6 +64,7 @@ Os assuntos vistos em aula serão listados aqui.
 |    N |   data | assunto
 | ---: | -----: | :--------
 |    1 |   4ago | apresentação, [algoritmos simples de ordenação](Assuntos/ord-int-simples.md)
+|    2 |   6ago | [algoritmos mais eficientes de ordenação](Assuntos/ord-int-eficientes.md)
 
 ## Exercícios, trabalhos
 

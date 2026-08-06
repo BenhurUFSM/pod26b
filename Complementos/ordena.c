@@ -344,7 +344,7 @@ void ordena_merge(int n, dado_t v[n])
       if (j >= n) break;
       // u é a última posição da segunda partição
       int u = j + t - 1;
-      if (u > n) u = n;
+      if (u > n - 1) u = n - 1;
       // faz a junção
       merge(v, i, j, u, w);
     }

@@ -411,7 +411,7 @@ void ordena_heap(int n, dado_t v[n])
 
   // v contém uma árvore heap, com o maior elemento em v[0].
   // A cada passo do laço, v[p] contém o último elemento da heap,
-  //   e a partir da posição p+1, os valores em v são todos não menores
+  //   e a partir da posição p+1, os valores em v são todos não maiores
   //   que os valores na heap, e estão em ordem crescente.
   // Esse elemento em v[0] é o maior da heap, e deve ser o próximo a
   //   ser colocado na parte ordenada do vetor (no seu início, em v[p]).
@@ -422,7 +422,8 @@ void ordena_heap(int n, dado_t v[n])
   // Prossegue assim até passar todos os elementos da heap para o final
   //   do vetor.
   for (int p = n-1; p > 0; p--) {
-    // a heap tem p+1 elementos, troca v[0] por v[p]
+    // a heap tem p+1 elementos, troca v[0] (o maior elemento)
+    //   por v[p] (o final do vetor com a heap / início do vetor ordenado)
     troca(v, 0, p);
     // a heap agora tem p elementos, as subárvores são heap, mas
     //   a raiz talvez não -> ajeita a raiz
@@ -435,14 +436,15 @@ void ordena_heap(int n, dado_t v[n])
 // reorganiza a árvore à partir de i para que seja uma heap.
 void heap_ajeita(int n, dado_t v[n], int i)
 {
+  // posição dos filhos de i
   int esq = 2 * i + 1;
+  int dir = esq + 1;
   // se o nó i não tem filho esquerdo, também não tem filho direito,
   //   e o nó i é uma árvore heap
   if (esq >= n) return;
 
   // encontra o filho que tem o maior valor
   int maior_filho = esq;
-  int dir = esq + 1;
   if (dir < n && !em_ordem_v(v, dir, esq)) maior_filho = dir;
 
   // se o maior valor dos filhos for maior que o valor em i,

@@ -65,9 +65,11 @@ Os assuntos vistos em aula serão listados aqui.
 | ---: | -----: | :--------
 |    1 |   4ago | apresentação, [algoritmos simples de ordenação](Assuntos/ord-int-simples.md)
 |    2 |   6ago | [algoritmos mais eficientes de ordenação](Assuntos/ord-int-eficientes.md)
+|    3 |  11ago | [algoritmos de ordenação por distribuição](Assuntos/ord-int-distribuicao.md)
 
 ## Exercícios, trabalhos
 
 |     N |     prazo | descrição
 | ----: | --------: | :-----------
 | t1    | 12ago     | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)
+

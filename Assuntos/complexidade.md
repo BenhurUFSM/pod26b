@@ -45,7 +45,13 @@ $$n^2 k_1 + n k_2 + k_3$$
 
 De todos os tempos, os maiores são $t_t$ e $t_c$, o que faz com que $k_1$ deva ser a maior das constantes.
 Mas podemos ignorar isso e supor que as 3 constantes sejam iguais. Façamos uma outra suposição, ainda mais improvável, de que as constantes $k_2$ e $k_3$ sejam bem maiores que $k_1$.
-Se plotarmos os dois gráficos, $y=x^2+x+1$ e $y=x^2+10x+10$ (colocando $k_2$ e $k_3$ 10 vezes maiores que $k_1$), vemos que, se o gráfico for plotado com $x$ entre 1 e 10 os gráficos são bem diferentes, mas se plotarmos com $x$ entre 1 e 1000, já fica até difícil de distingui-los. Isso significa que quanto maior o número de dados considerado, tanto mais o tempo de execução pode ser aproximado por
+Abaixo estão plotados os gráficos $y=x^2$, $y=x^2+x+1$ e $y=x^2+10x+10$ (colocando $k_2$ e $k_3$ 10 vezes maiores que $k_1$), com $x$ variando entre 0 e 10 e entre 0 e 1000.
+Dá para observar que as funções são bem diferentes entre 0 e 10, mas quase indistinguíveis para valores maiores de $x$.
+
+![gráfico para $x^2$ [0-10]](Complementos/x2-10.png)
+![gráfico para $x^2$ [0-1000]](Complementos/x2-1000.png)
+
+Quanto maior o número de dados considerado, mais os componentes menores podem ser ignorados, e o tempo de execução pode ser aproximado por
 
 $$k_b n^2$$
 

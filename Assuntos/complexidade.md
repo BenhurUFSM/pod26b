@@ -48,8 +48,8 @@ Mas podemos ignorar isso e supor que as 3 constantes sejam iguais. Façamos uma 
 Abaixo estão plotados os gráficos $y=x^2$, $y=x^2+x+1$ e $y=x^2+10x+10$ (colocando $k_2$ e $k_3$ 10 vezes maiores que $k_1$), com $x$ variando entre 0 e 10 e entre 0 e 1000.
 Dá para observar que as funções são bem diferentes entre 0 e 10, mas quase indistinguíveis para valores maiores de $x$.
 
-![gráfico para $x^2$ [0-10]](Complementos/x2-10.png)
-![gráfico para $x^2$ [0-1000]](Complementos/x2-1000.png)
+![gráfico para $x^2$ [0-10]](../Complementos/x2-10.png)
+![gráfico para $x^2$ [0-1000]](../Complementos/x2-1000.png)
 
 Quanto maior o número de dados considerado, mais os componentes menores podem ser ignorados, e o tempo de execução pode ser aproximado por
 

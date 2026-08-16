@@ -99,3 +99,8 @@ $$k_m n \log n$$
 
 Podemos comparar os dois algoritmos, bolha e merge plotando os gráficos para $k_b n^2$ e $k_m n \log n$.
 Variando-se os valores das constantes, muda-se basicamente o ponto (o valor de $x$) em que a linha da bolha ultrapassa a do merge, mas para quaisquer valores dessas constantes, depois que esse cruzamento acontece, o tempo do algoritmo da bolha afasta-se vertiginosamente daquele do merge (como pode ser observado no t1).
+Abaixo temos gráficos comparando $x^2$ e $x\log x$, com a constante $k_m$ 50 vezes maior que $k_b$. Em uma escala pequena de $x$, parece que $x\log x$ sempre será pior, mas em escala maior, vê-se que não é bem assim...
+
+![gráfico para $x\log x$ e $x^2$ [0-10]](../Complementos/log-x2-10.png)
+![gráfico para $x\log x$ e $x^2$ [0-1000]](../Complementos/log-x2-1000.png)
+

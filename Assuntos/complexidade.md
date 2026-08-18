@@ -115,8 +115,8 @@ constante | $1$ | 1 | 1 | 1 | 1 min | 1 min | 1 min
 linear | $n$ | 2 | 10 | 100 | 2 min | 10 min | 1,5 hora
 linear log | $n \log n$ | 2 | 30 | 660 | 2 min | 30 min | 11 horas
 quadrática | $n^2$ | 4 | 100 | 10000 | 4 min | 1,5 h | 1 semana
-cúbica | $n^3$ | 8 | 1000 | 1000000 | 8 min | 1 dia | 2 anos
-exponencial | $2^n$ | 4 | 1024 | $10^30$ | 4 min | 1 dia | $10^14$ universos
+cúbica | $n^3$ | 8 | 1000 | 1000000 | 8 min | 17 horas | 2 anos
+exponencial | $2^n$ | 4 | 1024 | $10^{30}$ | 4 min | 17 horas | $10^{14}$ universos
 
 ### Notação assintótica superior (notação O)
 

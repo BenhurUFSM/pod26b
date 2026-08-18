@@ -104,3 +104,44 @@ Abaixo temos gráficos comparando $x^2$ e $x\log x$, com a constante $k_m$ 50 ve
 ![gráfico para $x\log x$ e $x^2$ [0-10]](../Complementos/log-x2-10.png)
 ![gráfico para $x\log x$ e $x^2$ [0-1000]](../Complementos/log-x2-1000.png)
 
+### Comparação de complexidades
+
+Na tabela abaixo, temos algumas das complexidades mais comuns, e valores de tempo para dar uma ideia de como evolui com o aumento dos dados.
+A tabela considera que o tempo de processar $n$ itens é 1 minuto.
+
+complexidade | f(n) | f(2) | f(10) | f(100) | t(2) | t(10) | t(100)
+:--- | --- | --- | --- | --- | --- | --- | ---
+constante | $1$ | 1 | 1 | 1 | 1 min | 1 min | 1 min
+linear | $n$ | 2 | 10 | 100 | 2 min | 10 min | 1,5 hora
+linear log | $n \log n$ | 2 | 30 | 660 | 2 min | 30 min | 11 horas
+quadrática | $n^2$ | 4 | 100 | 10000 | 4 min | 1,5 h | 1 semana
+cúbica | $n^3$ | 8 | 1000 | 1000000 | 8 min | 1 dia | 2 anos
+exponencial | $2^n$ | 4 | 1024 | $10^30$ | 4 min | 1 dia | $10^14$ universos
+
+### Notação assintótica superior (notação O)
+
+É uma notação bastante usada, pois dá uma ideia do limite superior para a complexidade de um algoritmo.
+Se o tempo de execução de um algoritmo pode ser dado por $f(n)$, onde $n$ representa o tamanho do problema, diz-se que $f(n)$ é $O(g(n))$ se existem constantes positivas $c$ e $n_0$ de modo que $c g(n)$ é sempre maior que $f(n)$ para qualquer valor de $n$ maior que $n_0$.
+
+Os algoritmos de ordenação que vimos são:
+
+algoritmo | complexidade pior caso | complexidade média | complexidade melhor caso
+---: | --- | --- | ---
+bolha | $O(n^2)$ | $O(n^2)$ | $O(n)$
+seleção | $O(n^2)$ | $O(n^2)$ | $O(n^2)$
+inserção | $O(n^2)$ | $O(n^2)$ | $O(n)$
+merge | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$
+heap | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$
+quick | $O(n^2)$ | $O(n \log n)$ | $O(n \log n)$
+balde | $O(n^2)$ | $O(n)$ | $O(n)$
+contagem | $O(n+k)$ | $O(n+k)$ | $O(n+k)$
+raiz | $O(dn)$ | $O(dn)$ | $O(dn)$
+
+### Ordenação estável
+
+Um algoritmo de ordenação é dito estável se, para o caso de existirem dados considerados iguais na entrada, esses dados sejam colocados na saída na mesma ordem em que estavam na entrada. Por exemplo, se os dados de entrada são `7A 2B 3C 2D 1E` e a chave é o número, uma ordenação estável não pode produzir `1E 2D 2B 3C 7A` porque, apesar de estarem ordenados, os dois valores com a mesma chave não estão na mesma ordem que estavam na entrada.
+
+### Ordenação parcial
+
+Às vezes, não se está interessado na ordem total dos dados de entrada, mas somente se saber quais são os primeiros maiores (ou menores) entre os dados.
+Alguns algoritmos podem ser adaptados para produzir uma ordenação parcial a um custo inferior à ordenação total.

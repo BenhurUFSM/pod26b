@@ -123,19 +123,6 @@ exponencial | $2^n$ | 4 | 1024 | $10^{30}$ | 4 min | 17 horas | $10^{14}$ univer
 É uma notação bastante usada, pois dá uma ideia do limite superior para a complexidade de um algoritmo.
 Se o tempo de execução de um algoritmo pode ser dado por $f(n)$, onde $n$ representa o tamanho do problema, diz-se que $f(n)$ é $O(g(n))$ se existem constantes positivas $c$ e $n_0$ de modo que $c g(n)$ é sempre maior que $f(n)$ para qualquer valor de $n$ maior que $n_0$.
 
-Os algoritmos de ordenação que vimos são:
-
-algoritmo | complexidade pior caso | complexidade média | complexidade melhor caso
----: | --- | --- | ---
-bolha | $O(n^2)$ | $O(n^2)$ | $O(n)$
-seleção | $O(n^2)$ | $O(n^2)$ | $O(n^2)$
-inserção | $O(n^2)$ | $O(n^2)$ | $O(n)$
-merge | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$
-heap | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$
-quick | $O(n^2)$ | $O(n \log n)$ | $O(n \log n)$
-balde | $O(n^2)$ | $O(n)$ | $O(n)$
-contagem | $O(n+k)$ | $O(n+k)$ | $O(n+k)$
-raiz | $O(dn)$ | $O(dn)$ | $O(dn)$
 
 ### Ordenação estável
 
@@ -145,3 +132,21 @@ Um algoritmo de ordenação é dito estável se, para o caso de existirem dados 
 
 Às vezes, não se está interessado na ordem total dos dados de entrada, mas somente se saber quais são os primeiros maiores (ou menores) entre os dados.
 Alguns algoritmos podem ser adaptados para produzir uma ordenação parcial a um custo inferior à ordenação total.
+
+### Comparação dos algoritmos de ordenação vistos
+
+A complexidade de tempo para os algoritmos vistos, para o pior caso, o caso médio e o melhor caso, a complexidade em memória extra e se a ordenação é estável estão na tabela abaixo.
+Na tabela, $n$ é o número de dados a ordenar, $k$ o número de divisões (chaves ou baldes), $d$ o tamanho do alfabeto (10 no caso de dígitos) e $r$ o número de rodadas (quantos dígitos serão processados).
+
+algoritmo | pior caso | caso médio | melhor caso | memória | estável
+---: | --- | --- | --- | --- | ---
+bolha | $O(n^2)$ | $O(n^2)$ | $O(n)$ | $O(1)$ | sim
+seleção | $O(n^2)$ | $O(n^2)$ | $O(n^2)$ | $O(1)$ | não
+inserção | $O(n^2)$ | $O(n^2)$ | $O(n)$ | $O(1)$ | sim
+shell | $O(n^{3/2})$ | $O(n^{3/2})$ | $O(n)$ | $O(1)$ | não
+merge | $O(n \log n)$ | $O(n \log n)$ | $O(n)$ | $O(n)$ | sim
+heap | $O(n \log n)$ | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | não
+quick | $O(n^2)$ | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | não
+balde | $O(n^2+k)$ | $O(n+k)$ | $O(n+k)$ | $O(n+k)$ | sim
+contagem | $O(n+k)$ | $O(n+k)$ | $O(n+k)$ | $O(n+k)$ | sim
+raiz | $O(rn)$ | $O(rn)$ | $O(rn)$ | $O(n+d)$ | sim

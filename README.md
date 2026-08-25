@@ -69,6 +69,7 @@ Os assuntos vistos em aula serão listados aqui.
 |    4 |  13ago | [complexidade de algoritmos](Assuntos/complexidade.md)
 |    5 |  18ago | complexidade de algoritmos, cont
 |    6 |  20ago | [ordenação em memória externa](Assuntos/ord-ext.md)
+|    7 |  25ago | [busca, árvore AVL](Assuntos/busca.md)
 
 ## Exercícios, trabalhos
 

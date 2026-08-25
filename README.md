@@ -66,7 +66,9 @@ Os assuntos vistos em aula serão listados aqui.
 |    1 |   4ago | apresentação, [algoritmos simples de ordenação](Assuntos/ord-int-simples.md)
 |    2 |   6ago | [algoritmos mais eficientes de ordenação](Assuntos/ord-int-eficientes.md)
 |    3 |  11ago | [algoritmos de ordenação por distribuição](Assuntos/ord-int-distribuicao.md)
-|    4 |  13ago | [complexidade de algoritmos (pt1)](Assuntos/complexidade.md)
+|    4 |  13ago | [complexidade de algoritmos](Assuntos/complexidade.md)
+|    5 |  18ago | complexidade de algoritmos, cont
+|    6 |  20ago | [ordenação em memória externa](Assuntos/ord-ext.md)
 
 ## Exercícios, trabalhos
 

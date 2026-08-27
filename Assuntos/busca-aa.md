@@ -138,7 +138,7 @@ o filho esquerdo do 4 (que é o 2) tá dois níveis abaixo, diminui o nível do 
 1   2->3 5   7 9 11  13
 o skew do 4 não faz nada, mas do seu filho direito (10) sim, porque tem
   filho esquerdo (6) no mesmo nível
-2    4---->6---->10
+2    4--->6--->10--v
 2             8    12
 1   2->3 5   7 9 11  13
 aí em cima os filhos do 6 são 5 e 10, os do 10 são 8 e 12
@@ -149,14 +149,14 @@ ainda falta o skew do neto do 4 (que agora é o 10, e tem filho esquerdo 8
 agora o split do 4 (o neto direito dele é o 8, no mesmo nível -- sobe o 6,
   que fica com filhos 4 e 8, e substitui o 4 na raiz; o 4 fica com filhos
   2 e 5)
-3         6
-2    4        8-->10-->12
+3     6-------v
+2    4---v    8-->10-->12
 1   2->3 5   7   9   11  13
 mais o split do filho direito de quem substituiu o 4. O filho do 6 é o 8,
   que tem neto 12 no mesmo nível -- sobe o 10, que vira filho do 6; o 10
   fica com filhos 8 e 12, e o 8 fica com filhos 7 e 9:
 3     6------>10---v
-2    4       8     12
+2    4---v   8     12
 1   2->3 5  7 9  11  13
 o nó 6 é a raiz e não tem pai, fim da remoção
 ```

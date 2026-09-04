@@ -11,8 +11,8 @@ O alfabeto são os 10 dígitos decimais. Cada nó da árvore tem 10 nós destino
 ```mermaid
 block
 columns 1
-  block:raiz  r0["0"] r1 r2 r3 r4 r5 r6 r7 r8 r9 end
+  block:raiz  r0["0"] r1["1"] r2["2"] r3["3"] r4["4"] r5["5"] r6["6"] r7["7"] r8["8"] r9["9"] end
   space
-  block:b0   f00["0"] f01["1"] f02 f03 f04 f05 f06 f07 f08 f09 end
+  block:0   0b0["0"] 0b1["1"] 0b2["2"] 0b3["3"] 0b4["4"] 0b5["5"] 0b6["6"] 0b7["7"] 0b8["8"] 0b9["9"] end
   r0 --> b0
 ```

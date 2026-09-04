@@ -39,3 +39,24 @@ columns 4
   47b2 --> 472
   47b7 --> 477
 ```
+Adicionando "Batata" com chave "421", temos:
+```mermaid
+block
+columns 4
+  space block:raiz:2  r0["0"] r1["1"] r2["2"] r3["3"] r4["4"] r5["5"] r6["6"] r7["7"] r8["8"] r9["9"] end space
+  space:4
+  space block:4:2   4b0["0"] 4b1["1"] 4b2["2"] 4b3["3"] 4b4["4"] 4b5["5"] 4b6["6"] 4b7["7"] 4b8["8"] 4b9["9"] end space
+  space:4
+  block:42:2   42b0["0"] 42b1["1"] 42b2["2"] 42b3["3"] 42b4["4"] 42b5["5"] 42b6["6"] 42b7["7"] 42b8["8"] 42b9["9"] end
+  block:47:2   47b0["0"] 47b1["1"] 47b2["2"] 47b3["3"] 47b4["4"] 47b5["5"] 47b6["6"] 47b7["7"] 47b8["8"] 47b9["9"] end
+  space:4
+  421("421:Batata")
+  472("472:Arroz integral")
+  477("477:Feijão preto")
+  r4 --> 4
+  4b2 --> 42
+  4b7 --> 47
+  47b2 --> 472
+  47b7 --> 477
+  42b1 --> 421
+```

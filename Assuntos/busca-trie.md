@@ -84,7 +84,7 @@ Uma patrícia com só um valor tem somente um nó folha (que é também a raiz).
 A sequencia abaixo mostra a evolução de uma patricia, inicialmente com o valor "100010".
 ```mermaid
 block
-  ("100010")
+  r("100010")
 ```
 Adicionando o valor "111010": a adição funciona como uma busca, até se chegar a um nó folha. Então verifica-se o bit mais à direita que é diferente entre a chave já existente e a chave que se está adicionando. Cria-se um nó folha para a nova chave e um nó para esse bit que diferencia as duas chaves. Os bits são numerados à partir de 0, à partir do menos significativo. No caso, o bit menos significativo que é diferente entre "100010" e "111010" é o bit 3, o quarto da direita para a esquerda. A árvore ficaria assim:
 ```mermaid
@@ -98,4 +98,24 @@ columns 2
   a("100010") b("111010")
   r-->a
   r-->b
+```
+Adicionando agora o valor "101101", inicia-se a busca pela raiz, que diz que se deve olhar o bit 3 da chave. Esse bit tem o valor "1", então segue-se pela direita, encontrando o nó folha com o valor "111010". O primeiro bit diferente entre essas chaves é o bit 0, então a árvore fica:
+```mermaid
+block
+columns 3
+  block:g1:3
+    columns 3
+    space 3["3"] space
+  end
+  space:3
+  block:g2:3
+    columns 3
+    space space 0["0"]
+  end
+  space:3
+  a("100010") b("111010") c("101101")
+  3-->a
+  3-->0
+  0-->b
+  0-->c
 ```

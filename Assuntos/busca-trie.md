@@ -51,6 +51,7 @@ columns 4
   block:47:2   47b0["0"] 47b1["1"] 47b2["2"] 47b3["3"] 47b4["4"] 47b5["5"] 47b6["6"] 47b7["7"] 47b8["8"] 47b9["9"] end
   space:4
   421("421:Batata")
+  space
   472("472:Arroz integral")
   477("477:Feijão preto")
   r4 --> 4
@@ -59,4 +60,42 @@ columns 4
   47b2 --> 472
   47b7 --> 477
   42b1 --> 421
+```
+Nesse tipo de árvore, não é possível colocar chaves em que uma chave seja prefixo de outra. Na árvore acima, não dá para inserir um dado com chave "47" por exemplo.
+Se for o caso de se possuir chaves com essa característica, adiciona-se um símbolo ao alfabeto, para representar o final de uma chave. Por exemplo, poderíamos acrescentar o símbolo "." ao alfabeto, passando todos os nós da árvore a conter 11 ponteiros, e as chaves passam a ser adicionadas desse caractere no final. A chave "47" poderia ser então incluída, como "47.".
+
+Em uma trie, o tempo de busca independe do número de elementos na árvore, mas sim do número de símbolos na chave, que em geral é bem menor.
+A grande desvantagem dessa estrutura é o espaço ocupado, porque os nós são grandes, com um ponteiro para cada símbolo possível, e a maior parte desses ponteiros não são utilizados (a maior parte dos nós, principalmente os que estão mais baixo na árvore, têm poucos de seus ponteiros apontando para um outro nó da árvore).
+Para reduzir esse espaço, usa-se de algumas estratégias para compactar a trie.
+
+Uma possibilidade é remover os nós que só tem um link válido. Em alguns casos, armazena-se no link os símbolos que ele representa. Por exemplo, na árvore acima poderia ser incluída a chave "123", com um link na raíz apontando diretamente do "1" para o nó folha, o link com a informação "23". Pode-se também não colocar o valor no link, mas uma informação no nó que diz a posição do caractere que deve ser usada para seguir no nó. Nesse caso, quando se chega em um nó folha, deve-se comparar a chave procurada com a chave da folha para ver se ela representa realmente a chave correta.
+
+Uma outra possibilidade é só armazenar ponteiros que efetivamente apontem para algum nó, diminuindo o tamanho de cada nó. Junto a cada ponteiro deve-se identificar o símbolo ao qual ele se refere. Em geral, usa-se mais de um nó pequeno para implementar um nó da árvore original. No exemplo acima, o nó raiz só precisa uma ponteiro, para o símbolo "4".
+
+Outra possibilidade ainda é reduzir o alfabeto, aumentando o número de símbolos em uma chave. No limite, o alfabeto pode ser binário, e a chave ser comparada bit a bit.
+A árvore "patricia" é um exemplo de uma trie que usa os dois mecanismos de compactação da trie.
+
+###### Árvore patricia
+
+O nome vem de "Practical AlgoriThm foR Information Coded In Alphanumeric", e é uma trie binária, com supressão de nós que só teriam um ponteiro.
+A chave é quebrada nos bits de sua representação binária, e cada bit é usado para escolher o caminho a seguir. Cada nó tem dois ponteiros, um para o bit 0 e outro para o bit 1. Além disso, tem um número que diz qual o bit que deve ser usado.
+Com $n$ valores adicionados a uma patricia, a árvore conterá $n$ nós folha, um para cada chave e $n-1$ nós intermediários. A adição de um valor na árvore causa a inclusão de um nó folha e um nó intermediário.
+Uma patrícia com só um valor tem somente um nó folha (que é também a raiz).
+A sequencia abaixo mostra a evolução de uma patricia, inicialmente com o valor "100010".
+```mermaid
+block
+  ("100010")
+```
+Adicionando o valor "111010": a adição funciona como uma busca, até se chegar a um nó folha. Então verifica-se o bit mais à direita que é diferente entre a chave já existente e a chave que se está adicionando. Cria-se um nó folha para a nova chave e um nó para esse bit que diferencia as duas chaves. Os bits são numerados à partir de 0, à partir do menos significativo. No caso, o bit menos significativo que é diferente entre "100010" e "111010" é o bit 3, o quarto da direita para a esquerda. A árvore ficaria assim:
+```mermaid
+block
+columns 2
+  block:g1:2
+    columns 3
+    space r["3"] space
+  end
+  space:2
+  a("100010") b("111010")
+  r-->a
+  r-->b
 ```

@@ -69,8 +69,10 @@ Os assuntos vistos em aula serão listados aqui.
 |    4 |  13ago | [complexidade de algoritmos](Assuntos/complexidade.md)
 |    5 |  18ago | complexidade de algoritmos, cont
 |    6 |  20ago | [ordenação em memória externa](Assuntos/ord-ext.md)
-|    7 |  25ago | [busca, árvore AVL](Assuntos/busca.md)
+|    7 |  25ago | [busca em memória interna, árvore AVL](Assuntos/busca.md)
 |    8 |  27ago | [árvore AA](Assuntos/busca-aa.md)
+|    9 |   1set | [tabela hash](Assuntos/busca-hash.md), [árvore trie](Assuntos/busca-trie.md)
+|   10 |   3set | [busca em memória externa, árvore B+](Assuntos/busca-ext.md)
 
 ## Exercícios, trabalhos
 

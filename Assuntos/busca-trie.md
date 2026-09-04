@@ -9,9 +9,9 @@ Considere que a chave é numérica e que se escolha os dígitos da chave como s�
 O alfabeto são os 10 dígitos decimais. Cada nó da árvore tem 10 nós destinos, um para cada símbolo possível.
 
 ```mermaid
-block
-  raiz block r0 r1 r2 r3 r4 r5 r6 r7 r8 r9 end
-  b0   block f00 f01 f02 f03 f04 f05 f06 f07 f08 f09 end
-link
+columns 1
+block:raiz  r0 r1 r2 r3 r4 r5 r6 r7 r8 r9 end
+space
+block:b0   f00 f01 f02 f03 f04 f05 f06 f07 f08 f09 end
   r0 --> b0
 ```

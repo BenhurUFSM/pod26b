@@ -119,3 +119,30 @@ columns 3
   0-->b
   0-->c
 ```
+Se nessa árvore incluirmos o nó "111110", na busca chegamos à folha com "111010". O bit menos significativo que os diferencia é o bit 2. Para inserir o novo nó intermediário (com o valor 2), devemos subir na árvore até encontrar um nó com valor maior, e inserir logo abaixo dele:
+```mermaid
+block
+columns 3
+  block:g1:3
+    columns 3
+    space 3["3"] space
+  end
+  space:3
+  block:g2:3
+    columns 3
+    space space 2["2"]
+  end
+  space:3
+  block:g3:3
+    columns 3
+    space space 0["0"]
+  end
+  space:3
+  a("100010") b("111010") d("111110") c("101101")
+  3-->a
+  3-->2
+  0-->b
+  0-->c
+  2-->b
+  2-->d
+```

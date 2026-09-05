@@ -146,3 +146,6 @@ columns 3
   2-->0
   2-->d
 ```
+Caso se tenha chaves que possam ser prefixos de outras, unifica-se o tamanho das chaves em número de bits, adicionando-se bits 0 à esquerda das chaves menores. Dessa forma, não é necessário aumentar o tamanho do alfabeto, o que teria consequências importantes, porque aumentaria ele em 50% (de 2 para 3).
+
+Para a remoção de uma chave, remove-se também o nó intermediário logo acima dela, alterando o ponteiro do pai desse nó que apontava para ele para passar a apontar para o filho que sobra no nó a ser removido.

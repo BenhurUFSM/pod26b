@@ -78,6 +78,6 @@ Os assuntos vistos em aula serão listados aqui.
 
 |     N |     prazo | descrição
 | ----: | --------: | :-----------
-| t1    | ~12~17ago     | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)
-| t2    |               | [medições de tempo de árvores binárias de busca](Trabalhos/t2)
+| t1    | ~12~17ago | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)
+| t2    | 8set      | [medições de tempo de árvores binárias de busca](Trabalhos/t2)
 

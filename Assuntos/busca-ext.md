@@ -1,4 +1,5 @@
-`block
+```mermaid
+block
 columns 21
 l1(("+")) a:2 l2(("+")) b:2 l3(("+")) c:2 l4(("+"))
 space

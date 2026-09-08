@@ -1,26 +1,15 @@
-```mermaid
-block
-columns 30
-  space:10
-  block:r:10
-  columns 10
-  block:l1:1 space end
-  C:2
-  block:l2:1 space end
-  D["D"]:2
-  block:l3:1 space end
-  E:2
-  block:l4:1 space end
-  end
-  space:10
-  space:30
-  block:w:10
-  columns 10
-  a bc:2 d ef:2 g xy:2 z
-  end
-  block:x:10
-  space B:2 space space:2 space space:2 space
-  end
-  l1-->w
-  l2-->x
+`block
+columns 21
+l1(("+")) a:2 l2(("+")) b:2 l3(("+")) c:2 l4(("+"))
+space
+dl1(("+")) d:2 dl2(("+")) e["e"]:2 dl3(("+")) f:2 dl4(("+"))
+space:21
+block:z:5 x y w end
+space
+block:zzz:5 xxx yyy qww end
+space
+block:zz:5 xx yy ww end
+l1-->z
+l4-->zzz
+dl2-->zz
 ```

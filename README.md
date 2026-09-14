@@ -72,7 +72,9 @@ Os assuntos vistos em aula serão listados aqui.
 |    7 |  25ago | [busca em memória interna, árvore AVL](Assuntos/busca.md)
 |    8 |  27ago | [árvore AA](Assuntos/busca-aa.md)
 |    9 |   1set | [tabela hash](Assuntos/busca-hash.md), [árvore trie](Assuntos/busca-trie.md)
-|   10 |   3set | [busca em memória externa, árvore B+](Assuntos/busca-ext.md)
+|   10 |   3set | busca em memória externa, árvore B+
+|   11 |   8set | busca em memória externa, índice hash
+|   12 |  10set | busca em memória externa, índice multidimensional
 
 ## Exercícios, trabalhos
 

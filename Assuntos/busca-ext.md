@@ -1,3 +1,11 @@
+## Árvore B+
+
+### Busca
+
+### Inserção
+
+
+
 A árvore está inicialmente vazia. Com a inclusão de `P`, a raiz é transformada em um nó folha. As inclusões seguintes de `M` e `G` são colocadas no mesmo nó, reordenando a cada vez. Ao final temos a situação abaixo, com o nó cheio. Nesse desenho, os nós folha estão sendo representados sem os links para os registros de dados correspondentes às chaves, nem o link que interliga os nós folha.
 ```mermaid
 block
@@ -308,7 +316,7 @@ block
   i3l1-->f2
   i3l2-->f9
 ```
-Se agora removermos o `P`, ele é simplesmente retirado do nó, restando `RT`. Se então removermos o `T`, o nó `P` deverá ser fundido ao nó `UV`, resultando em `PUV`. O nó com `UV` é removido, e seu link e a chave `U` são removidos do seu pai, que fica sem chaves. Seu irmão esquerdo tem 2 chaves (`K` e `M`), então o remanejo pode ser feito. As chaves envolvidas são `K`, `M` e `P` (que está no pai deles, a raiz). Fica `K` na esquerda, `P` na direita e `M` na raiz:
+Se agora removermos o `P`, ele é simplesmente retirado do nó, restando `RT`. Se então removermos o `R`, o nó `T` deverá ser fundido ao nó `UV`, resultando em `TUV`. O nó com `UV` é removido, e seu link e a chave `U` são removidos do seu pai, que fica sem chaves. Seu irmão esquerdo tem 2 chaves (`K` e `M`), então o remanejo pode ser feito. As chaves envolvidas são `K`, `M` e `P` (que está no pai deles, a raiz). Fica `K` na esquerda, `P` na direita e `M` na raiz:
 ```mermaid
 block
   columns 23
@@ -332,7 +340,7 @@ block
   block:f4:2 f4a("K") f4b("L") f4c("—") end
   space:4
   block:f8:2 f8a("M") f8b("O") f8c("—") end
-  block:f2:2 f2a("P") f2b("U") f2c("V") end
+  block:f2:2 f2a("T") f2b("U") f2c("V") end
   space:3
 
   rl1-->i1l4
@@ -347,3 +355,6 @@ block
   i3l1-->f8
   i3l2-->f2
 ```
+#### Exercícios
+
+Faça as inserções que faltaram, e continue as remoções, sempre da maior chave, até esvaziar a árvore.

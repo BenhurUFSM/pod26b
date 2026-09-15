@@ -22,6 +22,7 @@ A inclusão de `T` enche o nó folha da direita, e a inclusão de `A` enche o n�
 ```mermaid
 block
   columns 8
+  space
   block:rl1 space end P block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
   space:8
 
@@ -102,17 +103,17 @@ block
 A inclusão de `H` e `D` enche os nós `ABD` e `GHJ`. A inclusão de `I` causa o estouro deste último e sua divisão em `GH` e `IJ`, subindo `I` para o nó `EG`, que vira `EGI`:
 ```mermaid
 block
-  columns 18
+  columns 20
   space:9
   block:rl1 space end ra["K"] block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
-  space:2
-  space:18
+  space:4
+  space:20
 
   space:3
   block:i1l1 space end i1a["E"] block:i1l2 space end i1b["G"] block:i1l3 space end i1c["I"] block:i1l4 space end
-  space
+  space:3
   block:i2l1 space end i2a["P"] block:i2l2 space end i2b["—"] block:i2l3 space end i2c["—"] block:i2l4 space end
-  space:18
+  space:20
 
   block:f1:3 f1a("A") f1b("B") f1c("D") end
   block:f5:3 f5a("E") f5b("F") f5c("—") end
@@ -120,6 +121,7 @@ block
   block:f6:3 f6a("I") f6b("J") f6c("—") end
   block:f4:3 f4a("K") f4b("M") f4c("—") end
   block:f2:3 f2a("P") f2b("T") f2c("V") end
+  space:2
 
   rl1-->i1c
   rl2-->i2a
@@ -141,9 +143,8 @@ block
 
   space:2
   block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
-  space:3
+  space:5
   block:i2l1 space end i2a["K"] block:i2l2 space end i2b["P"] block:i2l3 space end i2c["—"] block:i2l4 space end
-  space:2
   space:21
 
   block:f1:3 f1a("A") f1b("B") f1c("—") end

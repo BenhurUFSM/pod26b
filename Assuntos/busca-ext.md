@@ -140,6 +140,7 @@ block
   block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
   space:3
   block:i2l1 space end i2a["K"] block:i2l2 space end i2b["P"] block:i2l3 space end i2c["—"] block:i2l4 space end
+  space:2
   space:21
 
   block:f1:3 f1a("A") f1b("B") f1c("—") end

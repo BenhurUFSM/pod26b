@@ -96,28 +96,33 @@ block
   i2l1-->f4
   i2l2-->f2
 ```
-
-* * *
+A inclusão de `H` e `D` enche os nós `ABD` e `GHJ`. A inclusão de `I` causa o estouro deste último e sua divisão em `GH` e `IJ`, subindo `I` para o nó `EG`, que vira `EGI`:
 ```mermaid
 block
-columns 15
-space:4
-block:rl1 space end ra block:rl2 space end rb block:rl3 space end rc block:rl4 space end
-space:4
-space:15
-block:l1 space end a block:l2 space end b block:l3 space end c block:l4 space end
-space
-block:dl1 space end d block:dl2 space end e block:dl3 space end f block:dl4 space end
-%%dl1(("+")) d:2 dl2(("+")) e["e"]:2 dl3(("+")) f:2 dl4(("+"))
-space:15
-block:z:2 x y w end
-space
-block:zzz:3 xxx yyy qww end
-space
-block:zz:3 xx yy ww end
-rl1-->b
-l1-->z
-l4-->zzz
-l2-->z
-dl2-->zz
+  columns 18
+  space:9
+  block:rl1 space end ra["K"] block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
+  space:2
+  space:18
+
+  space:3
+  block:i1l1 space end i1a["E"] block:i1l2 space end i1b["G"] block:i1l3 space end i1c["I"] block:i1l4 space end
+  space
+  block:i2l1 space end i2a["P"] block:i2l2 space end i2b["—"] block:i2l3 space end i2c["—"] block:i2l4 space end
+  space:18
+
+  block:f1:3 f1a("A") f1b("B") f1c("D") end
+  block:f5:3 f5a("E") f5b("F") f5c("—") end
+  block:f3:3 f3a("G") f3b("H") f3c("—") end
+  block:f6:3 f6a("I") f6b("J") f6c("—") end
+  block:f4:3 f4a("K") f4b("M") f4c("—") end
+  block:f2:3 f2a("P") f2b("T") f2c("V") end
+
+  rl1-->i1l3
+  rl2-->i2l2
+  i1l1-->f1
+  i1l2-->f5
+  i1l3-->f3
+  i2l1-->f4
+  i2l2-->f2
 ```

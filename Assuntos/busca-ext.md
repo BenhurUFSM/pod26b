@@ -165,3 +165,47 @@ block
   i2l2-->f4
   i2l3-->f2
 ```
+A inclusão de `LRNUQOS` fica como exercício. A árvore resultante está abaixo:
+```mermaid
+block
+  columns 24
+  space:9
+  block:rl1 space end ra["I"] block:rl2 space end rb["P"] block:rl3 space end rc["—"] block:rl4 space end
+  space:8
+  space:24
+
+  space:2
+  block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
+  space:2
+  block:i2l1 space end i2a["K"] block:i2l2 space end i2b["M"] block:i2l3 space end i2c["—"] block:i2l4 space end
+  space
+  block:i3l1 space end i3a["R"] block:i3l2 space end i3b["T"] block:i3l3 space end i3c["—"] block:i3l4 space end
+  space:24
+
+  block:f1:2 f1a("A") f1b("B") f1c("—") end
+  block:f7:2 f7a("C") f7b("D") f7c("—") end
+  block:f5:2 f5a("E") f5b("F") f5c("—") end
+  block:f3:2 f3a("G") f3b("H") f3c("—") end
+  block:f6:2 f6a("I") f6b("J") f6c("—") end
+  block:f4:2 f4a("K") f4b("L") f4c("—") end
+  block:f8:2 f8a("M") f8b("N") f8c("O") end
+  space:2
+  block:f2:2 f2a("P") f2b("Q") f2c("—") end
+  block:fa:2 faa("R") fab("S") fac("—") end
+  block:f9:2 f9a("T") f9b("U") f9c("V") end
+  space:2
+
+  rl1-->i1c
+  rl2-->i2b
+  rl3-->i3a
+  i1l1-->f1
+  i1l2-->f7
+  i1l3-->f5
+  i1l4-->f3
+  i2l1-->f6
+  i2l2-->f4
+  i2l3-->f8
+  i3l1-->f2
+  i3l2-->fa
+  i3l3-->f9
+```

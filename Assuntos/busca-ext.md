@@ -76,7 +76,7 @@ block
   space:19
 
   space:2
-  block:i1l1 space end i1a["E"] block:i1l2 space end i1b["G"] block:i1l3 space end i1c["—"] block:i2l4 space end
+  block:i1l1 space end i1a["E"] block:i1l2 space end i1b["G"] block:i1l3 space end i1c["—"] block:i1l4 space end
   space:2
   space
   block:i2l1 space end i2a["P"] block:i2l2 space end i2b["—"] block:i2l3 space end i2c["—"] block:i2l4 space end

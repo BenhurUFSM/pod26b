@@ -3,7 +3,7 @@ A árvore está inicialmente vazia. Com a inclusão de `P`, a raiz é transforma
 block
   block:f1:3 f1a("G") f1b("M") f1c("P") end
 ```
-Com a inclusão de `V`, o nó estoura, e não sem outro nó para onde enviar dados excedentes. Um novo nó folha é criado, e o total de dados é dividido assim: metade dos dados permanece no nó já existente e o restante é colocado no novo nó. O primeiro valor do novo nó, juntamente com a referência a esse novo nó é enviado para ser colocado no nó superior. Como o nó que foi quebrado é a raiz, não existe nó superior. É criado um novo nó intermediário, que passa a ser a nova raiz:
+Com a inclusão de `V`, o nó estoura. Um novo nó folha é criado, e o total de dados é dividido assim: metade dos dados permanece no nó já existente (`G` e `M`) e o restante (`P` e `V`) é colocado no novo nó. O primeiro valor do novo nó (`P`), juntamente com a referência a esse novo nó é enviado para ser colocado no nó superior. Como o nó que foi quebrado é a raiz, não existe nó superior. É criado um novo nó intermediário, que passa a ser a nova raiz:
 ```mermaid
 block
   columns 7
@@ -29,7 +29,7 @@ block
   rl1-->f1
   rl2-->f2
 ```
-A inclusão de `E` causa o estouro da folha à esquerda, e como a folha irmã não tem espaço, é criada uma nova folha, e os valores são distribuídos como antes: metade na folha existente (`A` e `E`), o restante na nova (`G` e `M`). O primeiro valor da nova folha (`G`) e a referência ao novo nó são enviados para o nó acima (a raiz), que tem espaço para acomodá-los:
+A inclusão de `E` causa o estouro da folha à esquerda e a criação de uma nova folha. Os valores envolvidos (`A`, `E`, `G` e `M`) são distribuídos como antes: metade na folha existente (`A` e `E`), o restante na nova (`G` e `M`). O primeiro valor da nova folha (`G`) e a referência ao novo nó são enviados para o nó acima (a raiz), que tem espaço para acomodá-los:
 ```mermaid
 block
   columns 11
@@ -45,6 +45,25 @@ block
   rl1-->f1
   rl2-->f3
   rl3-->f2
+```
+As inclusões de `B` e `J` enchem os nós folha da esquerda. A inclusão de `K` causa o estouro do nó folha com `G`, `J` e `M`, que fica com `G` e `J`, indo `K` e `M` para um novo nó, e subindo `K` e a referência ao novo nó para a raiz:
+```mermaid
+block
+  columns 15
+  space:4
+  block:rl1 space end ra["G"] block:rl2 space end rb["K"] block:rl3 space end rc["P"] block:rl4 space end
+  space:4
+  space:15
+
+  block:f1:3 f1a("A") f1b("B") f1c("E") end space
+  block:f3:3 f3a("G") f3b("J") f3c("—") end space
+  block:f4:3 f4a("K") f4b("M") f4c("—") end space
+  block:f2:3 f2a("P") f2b("T") f2c("V") end
+
+  rl1-->f1
+  rl2-->f3
+  rl3-->f4
+  rl4-->f2
 ```
 
 * * *

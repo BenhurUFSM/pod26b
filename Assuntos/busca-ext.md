@@ -123,6 +123,41 @@ block
   i1l1-->f1
   i1l2-->f5
   i1l3-->f3
+  i1l4-->f6
   i2l1-->f4
   i2l2-->f2
+```
+A inserção de `C` causa o estouro do nó `ABD`, que é dividido em `AB` e `CD`, subindo `C` e o link para o novo nó. Essa informação não cabe no nó acima (`EGI`). O nó acima tem um irmão (`P`) com espaço, então a informação dos nós é distribuída entre eles. Nessa redistribuição, deve-se considerar, além dos valores constantes nos dois nós que serão mesclados, também o valor da chave intermediária que está no nó pai (`K`). A redistribuição então é dos valores `CEGIKP`, em que o valor do meio (`G` ou `I`) sobe para o pai, os da esquerda ficam no nó da esquerda e os da direita no nó da direita. Subindo `I`, resulta na árvore abaixo.
+```mermaid
+block
+  columns 21
+  space:10
+  block:rl1 space end ra["I"] block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
+  space:4
+  space:21
+
+  space:4
+  block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
+  space:2
+  block:i2l1 space end i2a["K"] block:i2l2 space end i2b["P"] block:i2l3 space end i2c["—"] block:i2l4 space end
+  space
+  space:21
+
+  block:f1:3 f1a("A") f1b("B") f1c("—") end
+  block:f7:3 f7a("C") f7b("D") f7c("—") end
+  block:f5:3 f5a("E") f5b("F") f5c("—") end
+  block:f3:3 f3a("G") f3b("H") f3c("—") end
+  block:f6:3 f6a("I") f6b("J") f6c("—") end
+  block:f4:3 f4a("K") f4b("M") f4c("—") end
+  block:f2:3 f2a("P") f2b("T") f2c("V") end
+
+  rl1-->i1l3
+  rl2-->i2l2
+  i1l1-->f1
+  i1l2-->f7
+  i1l3-->f5
+  i1l4-->f3
+  i2l1-->f6
+  i2l2-->f4
+  i2l3-->f2
 ```

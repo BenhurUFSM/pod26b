@@ -131,16 +131,15 @@ A inserção de `C` causa o estouro do nó `ABD`, que é dividido em `AB` e `CD`
 ```mermaid
 block
   columns 21
-  space:10
+  space:9
   block:rl1 space end ra["I"] block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
-  space:4
+  space:5
   space:21
 
-  space:4
-  block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
   space:2
+  block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
+  space:3
   block:i2l1 space end i2a["K"] block:i2l2 space end i2b["P"] block:i2l3 space end i2c["—"] block:i2l4 space end
-  space
   space:21
 
   block:f1:3 f1a("A") f1b("B") f1c("—") end
@@ -151,8 +150,8 @@ block
   block:f4:3 f4a("K") f4b("M") f4c("—") end
   block:f2:3 f2a("P") f2b("T") f2c("V") end
 
-  rl1-->i1l3
-  rl2-->i2l2
+  rl1-->i1c
+  rl2-->i2a
   i1l1-->f1
   i1l2-->f7
   i1l3-->f5

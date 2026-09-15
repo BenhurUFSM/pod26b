@@ -69,25 +69,27 @@ A inserção de `F` causa o estouro do nó `ABE`, que é quebrado em `AB` e `EF
 Não existe nó acima (já que estamos quebrando a raiz), então a chave que sobe é acomodada em um novo nó raiz:
 ```mermaid
 block
-  columns 15
-  space:5
+  columns 17
+  space:8
   block:rl1 space end ra["K"] block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
-  space:3
-  space:15
+  space:2
+  space:17
 
+  space:2
   block:i1l1 space end i1a["E"] block:i1l2 space end i1b["G"] block:i1l3 space end i1c["—"] block:i1l4 space end
   space
   block:i2l1 space end i2a["P"] block:i2l2 space end i2b["—"] block:i2l3 space end i2c["—"] block:i2l4 space end
-  space:15
+  space:17
 
   block:f1:3 f1a("A") f1b("B") f1c("—") end
   block:f5:3 f5a("E") f5b("F") f5c("—") end
   block:f3:3 f3a("G") f3b("J") f3c("—") end
   block:f4:3 f4a("K") f4b("M") f4c("—") end
   block:f2:3 f2a("P") f2b("T") f2c("V") end
+  space:2
 
-  rl1-->i1b
-  rl2-->i2b
+  rl1-->i1l3
+  rl2-->i2l2
   i1l1-->f1
   i1l2-->f5
   i1l3-->f3

@@ -211,4 +211,100 @@ block
 
 ### Remoção
 
-Na remoção, 
+Na remoção, a chave deve ser encontrada em um nó folha (senão, não há nada a ser removido). A chave é então removida do nó folha e, caso o número de chaves restantes seja pelo menos o mínimo aceito para um nó folha, a remoção está feita.
+
+Caso restem menos chaves que o permitido no nó folha, deve-se observar um nó vizinho irmão e:
+- se as chaves nos dois nós forem suficientes para serem distribuídas entre os dois nós (de forma que ambos fiquem pelo menos com o mínimo permitido), é feito um remanejo;
+- se o número de chaves for insuficiente, deve ser feita uma fusão.
+
+No remanejo, as chaves são redistribuídas entre os nós, de forma a ficar aproximadamente metade em cada, e o nó pai é alterado para substituir o valor intermediário pelo valor que ficou no início do nó da direita. Após o remanejo, a remoção está completa.
+
+Na fusão, as chaves do nó da direita são transferidas para o nó da esquerda, e o nó da direita é liberado. O ponteiro para o nó da direita e o valor correspondente a ele devem ser removidos do nó pai. Essa remoção no nó pai pode levar à necessidade de um remanejo ou fusão no nó pai. Todos os nós até a raiz podem ser afetados, e se a raiz ficar sem nenhuma chave, é removida e seu único filho se torna raiz.
+
+O remanejo e fusão em um nó intermediário deve levar em consideração o valor contido no nó pai, entre os ponteiros para os dois nós envolvidos.
+
+Considerando a árvore final do exemplo acima, se removermos a chave (`N`), ela será simplesmente removida do nó raiz que a contém, transformando `MNO` em `MO`.
+Se após isso removermos `S`, o nó `RS` ficará somente com `R`, o que não é permitido para um nó folha. O irmão direito desse nó tem `TUV`, sendo possível remanejar, ficando `RT` no nó esquerdo e `UV` no direito. No nó pai, a chave `T` deve ser a lterada para `U`, resultando na árvore abaixo.
+```mermaid
+block
+  columns 23
+  space:10
+  block:rl1 space end ra["I"] block:rl2 space end rb["P"] block:rl3 space end rc["—"] block:rl4 space end
+  space:6
+  space:23
+
+  block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
+  space
+  block:i2l1 space end i2a["K"] block:i2l2 space end i2b["M"] block:i2l3 space end i2c["—"] block:i2l4 space end
+  space
+  block:i3l1 space end i3a["R"] block:i3l2 space end i3b["U"] block:i3l3 space end i3c["—"] block:i3l4 space end
+  space:23
+
+  block:f1:2 f1a("A") f1b("B") f1c("—") end
+  block:f7:2 f7a("C") f7b("D") f7c("—") end
+  block:f5:2 f5a("E") f5b("F") f5c("—") end
+  block:f3:2 f3a("G") f3b("H") f3c("—") end
+  block:f6:2 f6a("I") f6b("J") f6c("—") end
+  block:f4:2 f4a("K") f4b("L") f4c("—") end
+  block:f8:2 f8a("M") f8b("O") f8c("—") end
+  space:2
+  block:f2:2 f2a("P") f2b("Q") f2c("—") end
+  block:fa:2 faa("R") fab("T") fac("—") end
+  block:f9:2 f9a("U") f9b("V") f9c("—") end
+  space:1
+
+  rl1-->i1l4
+  rl2-->i2b
+  rl3-->i3l1
+  i1l1-->f1
+  i1l2-->f7
+  i1l3-->f5
+  i1l4-->f3
+  i2l1-->f6
+  i2l2-->f4
+  i2l3-->f8
+  i3l1-->f2
+  i3l2-->fa
+  i3l3-->f9
+```
+Se agora removermos o `Q`, o nó `PQ` ficará somente com `P`. Seu vizinho esquerdo não é irmão, e seu vizinho direito não tem chaves suficienter para remanejo, então será feita uma fusão entre `P` e `RT`, resultando em um nó com `PRT` e liberando o nó `RT`. O ponteiro para `RT` no nó pai deve ser removido, junto com a chave `R`. O nó pai fica só com a chave `U`, o que é permitido para um nó intermediário. A árvore fica:
+```mermaid
+block
+  columns 23
+  space:10
+  block:rl1 space end ra["I"] block:rl2 space end rb["P"] block:rl3 space end rc["—"] block:rl4 space end
+  space:6
+  space:23
+
+  block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
+  space
+  block:i2l1 space end i2a["K"] block:i2l2 space end i2b["M"] block:i2l3 space end i2c["—"] block:i2l4 space end
+  space
+  block:i3l1 space end i3a["U"] block:i3l2 space end i3b["—"] block:i3l3 space end i3c["—"] block:i3l4 space end
+  space:23
+
+  block:f1:2 f1a("A") f1b("B") f1c("—") end
+  block:f7:2 f7a("C") f7b("D") f7c("—") end
+  block:f5:2 f5a("E") f5b("F") f5c("—") end
+  block:f3:2 f3a("G") f3b("H") f3c("—") end
+  block:f6:2 f6a("I") f6b("J") f6c("—") end
+  block:f4:2 f4a("K") f4b("L") f4c("—") end
+  block:f8:2 f8a("M") f8b("O") f8c("—") end
+  space:2
+  block:f2:2 f2a("P") f2b("R") f2c("T") end
+  block:f9:2 f9a("U") f9b("V") f9c("—") end
+  space:3
+
+  rl1-->i1l4
+  rl2-->i2b
+  rl3-->i3l1
+  i1l1-->f1
+  i1l2-->f7
+  i1l3-->f5
+  i1l4-->f3
+  i2l1-->f6
+  i2l2-->f4
+  i2l3-->f8
+  i3l1-->f2
+  i3l2-->f9
+```

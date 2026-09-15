@@ -6,12 +6,14 @@ block
 Com a inclusão de `V`, o nó estoura. Um novo nó folha é criado, e o total de dados é dividido assim: metade dos dados permanece no nó já existente (`G` e `M`) e o restante (`P` e `V`) é colocado no novo nó. O primeiro valor do novo nó (`P`), juntamente com a referência a esse novo nó é enviado para ser colocado no nó superior. Como o nó que foi quebrado é a raiz, não existe nó superior. É criado um novo nó intermediário, que passa a ser a nova raiz:
 ```mermaid
 block
-  columns 7
+  columns 8
+  space
   block:rl1 space end P block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
-  space:7
+  space:8
 
   block:f1:3 f1a("G") f1b("M") f1c("—") end space
   block:f2:3 f2a("P") f2b("V") f2c("—") end
+  space
 
   rl1-->f1
   rl2-->f2
@@ -19,12 +21,13 @@ block
 A inclusão de `T` enche o nó folha da direita, e a inclusão de `A` enche o nó folha da esquerda.
 ```mermaid
 block
-  columns 7
+  columns 8
   block:rl1 space end P block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
-  space:7
+  space:8
 
   block:f1:3 f1a("A") f1b("G") f1c("M") end space
   block:f2:3 f2a("P") f2b("T") f2c("V") end
+  space
 
   rl1-->f1
   rl2-->f2
@@ -33,9 +36,9 @@ A inclusão de `E` causa o estouro da folha à esquerda e a criação de uma nov
 ```mermaid
 block
   columns 11
-  space:2
+  space:3
   block:rl1 space end ra["G"] block:rl2 space end rb["P"] block:rl3 space end rc["—"] block:rl4 space end
-  space:2
+  space:1
   space:11
 
   block:f1:3 f1a("A") f1b("E") f1c("—") end space
@@ -88,8 +91,8 @@ block
   block:f2:3 f2a("P") f2b("T") f2c("V") end
   space:2
 
-  rl1-->i1l3
-  rl2-->i2l2
+  rl1-->i1c
+  rl2-->i2a
   i1l1-->f1
   i1l2-->f5
   i1l3-->f3
@@ -118,8 +121,8 @@ block
   block:f4:3 f4a("K") f4b("M") f4c("—") end
   block:f2:3 f2a("P") f2b("T") f2c("V") end
 
-  rl1-->i1l3
-  rl2-->i2l2
+  rl1-->i1c
+  rl2-->i2a
   i1l1-->f1
   i1l2-->f5
   i1l3-->f3
@@ -137,9 +140,7 @@ block
   space:21
 
   space:2
-block:7
   block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
-end
   space:3
   block:i2l1 space end i2a["K"] block:i2l2 space end i2b["P"] block:i2l3 space end i2c["—"] block:i2l4 space end
   space:2

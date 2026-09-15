@@ -136,9 +136,9 @@ A inserção de `C` causa o estouro do nó `ABD`, que é dividido em `AB` e `CD`
 ```mermaid
 block
   columns 21
-  space:9
+  space:10
   block:rl1 space end ra["I"] block:rl2 space end rb["—"] block:rl3 space end rc["—"] block:rl4 space end
-  space:5
+  space:4
   space:21
 
   space:2
@@ -155,8 +155,8 @@ block
   block:f4:3 f4a("K") f4b("M") f4c("—") end
   block:f2:3 f2a("P") f2b("T") f2c("V") end
 
-  rl1-->i1c
-  rl2-->i2a
+  rl1-->i1l4
+  rl2-->i2l1
   i1l1-->f1
   i1l2-->f7
   i1l3-->f5
@@ -208,3 +208,7 @@ block
   i3l2-->fa
   i3l3-->f9
 ```
+
+### Remoção
+
+Na remoção, 

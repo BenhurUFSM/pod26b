@@ -169,9 +169,9 @@ A inclusão de `LRNUQOS` fica como exercício. A árvore resultante está abaixo
 ```mermaid
 block
   columns 23
-  space:9
+  space:10
   block:rl1 space end ra["I"] block:rl2 space end rb["P"] block:rl3 space end rc["—"] block:rl4 space end
-  space:7
+  space:6
   space:23
 
   block:i1l1 space end i1a["C"] block:i1l2 space end i1b["E"] block:i1l3 space end i1c["G"] block:i1l4 space end
@@ -195,7 +195,7 @@ block
   space:1
 
   rl1-->i1l4
-  rl2-->i2l2
+  rl2-->i2b
   rl3-->i3l1
   i1l1-->f1
   i1l2-->f7

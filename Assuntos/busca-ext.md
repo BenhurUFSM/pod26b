@@ -6,12 +6,12 @@ block
 Com a inclusão de `V`, o nó estoura, e não sem outro nó para onde enviar dados excedentes. Um novo nó folha é criado, e o total de dados é dividido assim: metade dos dados permanece no nó já existente e o restante é colocado no novo nó. O primeiro valor do novo nó, juntamente com a referência a esse novo nó é enviado para ser colocado no nó superior. Como o nó que foi quebrado é a raiz, não existe nó superior. É criado um novo nó intermediário, que passa a ser a nova raiz:
 ```mermaid
 block
-  columns 5
-  block:rl1 space end P block:rl2 space end space block:rl3 space end space block:rl4 space end
-  space:5
+  columns 7
+  block:rl1 space end P block:rl2 space end — block:rl3 space end — block:rl4 space end
+  space:7
 
-  block:f1:2 G M end space
-  block:f2:2 P V end
+  block:f1:3 G M — end space
+  block:f2:3 P V — end
 
   rl1-->f1
   rl2-->f2

@@ -39,11 +39,12 @@ block
   space:11
 
   block:f1:3 f1a("A") f1b("E") f1c("—") end space
-  block:f2:3 f1a("G") f1b("M") f1c("—") end space
+  block:f3:3 f3a("G") f3b("M") f3c("—") end space
   block:f2:3 f2a("P") f2b("T") f2c("V") end
 
   rl1-->f1
-  rl2-->f2
+  rl2-->f3
+  rl3-->f2
 ```
 
 * * *

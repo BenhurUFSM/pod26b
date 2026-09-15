@@ -7,16 +7,17 @@ Com a inclusão de `V`, o nó estoura, e não sem outro nó para onde enviar dad
 ```mermaid
 block
   columns 7
-  block:rl1 space end P block:rl2 space end — block:rl3 space end — block:rl4 space end
+  block:rl1 space end P block:rl2 space end rf1["—"] block:rl3 space end rf2["—"] block:rl4 space end
   space:7
 
-  block:f1:3 G M — end space
-  block:f2:3 P V — end
+  block:f1:3 G M f1f1["—"] end space
+  block:f2:3 P V f2f1["—"] end
 
   rl1-->f1
   rl2-->f2
 ```
 
+* * *
 ```mermaid
 block
 columns 15

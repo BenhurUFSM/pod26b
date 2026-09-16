@@ -1,10 +1,23 @@
 ## Árvore B+
 
+Uma árvore B+ é constituída de nós, que podem ser 'nó folha' ou 'nó intermediário'. Cada nó tem um conjunto de até $N$ links e até $N-1$ chaves.
+
+No caso de um nó folha, tem um link associado a cada chave, que diz qual o registro no arquivo de dados que corresponde a essa chave. O link restante é usado para apontar para o nó folha seguinte. As chaves são mantidas em ordem dentro de um nó, e os valores das chaves em um nó são todos menores que os valores das chaves no nó seguinte. Isso permite o percurso do arquivo por ordem de chave.
+
 ### Busca
+
+A busca por uma chave em uma árvore B+ inicia pelo nó raiz.
+No nó corrente:
+- se o nó for folha, busca-se a chave entre as chaves desse nó. Se for encontrada, o link correspondente à chave é o resultado da busca. Se não for encontrado, a chave não existe na árvore.
+- se o nó for intermediário, compara-se a chave buscada com os valores de chaves no nó, e segue-se para o nó correspondente ao primeiro link com uma chave maior ou igual à chave buscada. Se todas as chaves do nó forem menores que a buscada, segue-se para o nó do último link. Por exemplo, se o nó contiver as chaves `G`, `K` e `P`, e a chave buscada for `J`, a segunda chave (`K`) é a primeira que é maior ou igual a `J`, então continua-se no nó correspondente ao segundo link. Se a busca fosse pela chave `Q`, que é maior que todas as chaves do nó, o próximo nó seria o referenciado pelo último link do nó.
 
 ### Inserção
 
+A inserção é sempre realizada em um nó folha, o mesmo encontrado quando se faz a busca. Se esse nó tem espaço para mais uma chave, basta inserir essa chave e o link para o arquivo de dados que contém o dado correspondente e a inserção está feita.
+Se o nó já está cheio, um novo nó deve ser alocado, e o conjunto de chaves é dividido entre os dois nós. O nó pai deve ser alterado para incluir um ponteiro para esse novo nó, juntamente com o valor de uma chave para se poder decidir entre os dois nós. Uma chave adequada é aquela que ficou no início do novo nó.
 
+Essa inserção no nó pai pode provocar a necessidade de divisão desse nó, e isso pode acontecer em cascata até o nó raiz.
+Abaixo está um sequência de inserções em uma árvore inicialmente vazia, que exemplifica esses casos. As chaves são caracteres, e são inseridos, em ordem, os caracteres `PMGVTAEBJKFHDICLRNUQOS`.
 
 A árvore está inicialmente vazia. Com a inclusão de `P`, a raiz é transformada em um nó folha. As inclusões seguintes de `M` e `G` são colocadas no mesmo nó, reordenando a cada vez. Ao final temos a situação abaixo, com o nó cheio. Nesse desenho, os nós folha estão sendo representados sem os links para os registros de dados correspondentes às chaves, nem o link que interliga os nós folha.
 ```mermaid
@@ -316,7 +329,7 @@ block
   i3l1-->f2
   i3l2-->f9
 ```
-Se agora removermos o `P`, ele é simplesmente retirado do nó, restando `RT`. Se então removermos o `R`, o nó `T` deverá ser fundido ao nó `UV`, resultando em `TUV`. O nó com `UV` é removido, e seu link e a chave `U` são removidos do seu pai, que fica sem chaves. Seu irmão esquerdo tem 2 chaves (`K` e `M`), então o remanejo pode ser feito. As chaves envolvidas são `K`, `M` e `P` (que está no pai deles, a raiz). Fica `K` na esquerda, `P` na direita e `M` na raiz:
+Nessa configuração, se removemos o `P`, ele é simplesmente retirado do nó, restando `RT`. Removendo então o `R`, o nó `T` deverá ser fundido ao nó `UV`, resultando em `TUV`. O nó que tinha `UV` é removido, e seu link e a chave `U` são removidos do seu pai, que fica sem chaves. Seu irmão esquerdo tem 2 chaves (`K` e `M`), então o remanejo pode ser feito. As chaves envolvidas no remanejo são `K`, `M` e `P` (que está no pai deles, a raiz). Fica `K` na esquerda, `P` na direita e `M` na raiz:
 ```mermaid
 block
   columns 23

@@ -1,15 +1,40 @@
+# Busca em memória secundária
+
+Quando o volume de dados não cabe na memória primária (ou, mesmo que caiba, não se quer ocupar tanto espaço, ou se quer que sobrevivam ao programa que os acessa), a busca por um dado envolve acessos à memória secundária. Esses acessos devem ser otimizados, porque são tipicamente bem mais demorados que acessos à memória primária.
+
+A diferença de tempo de acesso a memória secundária em relação à primária depende das tecnologias envolvidas, mas podem ser dezenas de vezes a milhões de vezes mais demorado obter um dado que esteja na memória secundária em relação à obtê-lo se já estiver em memória primária. Além disso, como regra geral, o acesso a dados em posições próximas ou até consecutivas é mais rápido que o acesso em posições aleatórias, em qualquer tecnologia em uso atualmente.
+
+Uma forma comum de se otimizar esse acesso é separando os dados em um arquivo (ou mais) e índices que aceleram o acesso a esses dados em outros. Dessa forma, a busca por um dado envolve uma chave, que é buscada no arquivo de índice. Essa busca fornece uma identificação ou posição no arquivo de dados onde se encontra o dado correspondente a essa chave.
+
+Um arquivo de dados pode ter mais de um arquivo de índice, que o indexa por chaves diferentes. Por exemplo, um arquivo contendo o cadastro de pessoas poderia ser indexado por número de CPF ou por número de matrícula ou por cidade de nascimento etc.
+As chaves são divididas em chaves primárias, com uma correspondência única entre uma chave e um registro de dados e chaves secundárias, em que uma chave pode corresponder a vários registros (como seria o caso da cidade de nascimento no exemplo anterior). É comum no caso de chaves secundárias, em vez de se colocar várias cópias de cada chave repetida no arquivo de índice, ter um arquivo intermediário com *buckets*, cada um armazenando vários links para os vários registros do arquivo de dados correspondenter a uma chave, e o índice indexande esses *buckets*.
+
+Um arquivo de índice pode conter uma estrutura linear, mas o mais comum é ter uma estrutura mais complexa, para acelerar as buscas.
+Exemplos são árvores e tabelas *hash*. As árvores B+ são um bom exemplo.
+
 ## Árvore B+
 
-Uma árvore B+ é constituída de nós, que podem ser 'nó folha' ou 'nó intermediário'. Cada nó tem um conjunto de até $N$ links e até $N-1$ chaves.
+Uma árvore B+ é constituída de nós, que podem ser 'nó folha' ou 'nó intermediário'.
+Todos os nós folha estão no mesmo nível. O nó raiz pode ser folha (caso em que é o único nó da árvore) ou intermediário.
 
-No caso de um nó folha, tem um link associado a cada chave, que diz qual o registro no arquivo de dados que corresponde a essa chave. O link restante é usado para apontar para o nó folha seguinte. As chaves são mantidas em ordem dentro de um nó, e os valores das chaves em um nó são todos menores que os valores das chaves no nó seguinte. Isso permite o percurso do arquivo por ordem de chave.
+Um nó intermediário tem um conjunto de até $N$ links e até $N-1$ chaves. Se o nó tem $k$ chaves ativas, tem $k+1$ links ativos. As chaves são mantidas em ordem crescente. O primeiro link ativo aponta para a subárvore contém valores menores que a primeira chave ativa, o segundo link aponta a subárvore que tem valores maiores que a primeira chave e menores que a segunda, etc, e o último link ativo aponta para a subárvore que contém valores maiores ou iguais à última chave ativa.
+
+Pelo menos metade dos links de um nó intermediário devem estar ativos (por exemplo, se o nó tem capacidade para 11 links e 10 chaves, o nó deve possuir pelo menos 6 links e 5 chaves ativos; se tem capacidade para 10 links e 9 chaves, deve possuir pelo menos 5 links e 4 chaves ativos). Se for raiz, o limite mínimo é 1 chave e 2 links, independentemente da capacidade.
+
+Um nó folha tem capacidade para $M$ chaves, que são mantidas em ordem crescente. A cada chave está associado um link, que referencia o dado relacionado a essa chave no arquivo de dados, ou a um *bucket* que referencia os vários dados relacionados, no caso de isso ser possível (como é comum com chaves secundárias).
+É comum um nó folha possuir mais um link, para o nó folha que contém as chaves imediatamente sucedentes, para permitir o percurso do arquivo em ordem de chave sem a necessidade de buscas sucessivas.
+
+Em um nó folha, pelo menos metade das chaves deve estar ativa (um nó onde cabem 11 chaves deve ter pelo menos 6 chaves ativas). Caso seja raiz, não tem ocupação mínima.
+
+Tipicamente, um nó ocupa o máximo possível de um bloco de disco, para otimizar o tempo de E/S. Além das chaves e links, é necessário um pouco mais de informação no nó, como o seu tipo (folha ou intermediário), o número de chaves ativas, talvez o tamanho e o tipo de uma chave.
+O o número de chaves em um nó é definido pelo tamanho dessa informação adicional, de uma chave, de um link, e do bloco. Por exemplo, se um bloco tem 4k bytes, a informação adicional tem 4 bytes, uma chave tem 30 bytes e um link tem 4 bytes, seria possível colocar 120 chaves no bloco ($4+120*30+121*4 = 4088$, sobram 8 bytes no bloco). É possível ter uma capacidade diferente em um nó folha em relação a um nó intermediário, porque o link para dados pode exigir um tamanho diferente de um link para nó, e/ou porque não se armazena a chave inteira em um nó intermediário (em alguns casos isso é possível, porque o valor em um nó intermediário só é comparado com "<" contra o valor da chave buscada).
 
 ### Busca
 
 A busca por uma chave em uma árvore B+ inicia pelo nó raiz.
 No nó corrente:
-- se o nó for folha, busca-se a chave entre as chaves desse nó. Se for encontrada, o link correspondente à chave é o resultado da busca. Se não for encontrado, a chave não existe na árvore.
-- se o nó for intermediário, compara-se a chave buscada com os valores de chaves no nó, e segue-se para o nó correspondente ao primeiro link com uma chave maior ou igual à chave buscada. Se todas as chaves do nó forem menores que a buscada, segue-se para o nó do último link. Por exemplo, se o nó contiver as chaves `G`, `K` e `P`, e a chave buscada for `J`, a segunda chave (`K`) é a primeira que é maior ou igual a `J`, então continua-se no nó correspondente ao segundo link. Se a busca fosse pela chave `Q`, que é maior que todas as chaves do nó, o próximo nó seria o referenciado pelo último link do nó.
+- se o nó for folha, busca-se uma chave igual à chave buscada entre as chaves desse nó. Se for encontrada, o link correspondente é o resultado da busca. Se não for encontrado, a chave não existe na árvore.
+- se o nó for intermediário, compara-se a chave buscada ($c_b$) com os valores de chaves no nó (c_i), até achar a primeira em que ($c_b < c_i$) e segue-se para o nó correspondente ao link dessa chave ($l_i$). Se todas as chaves do nó forem menores que a buscada, segue-se para o nó do último link ativo. Por exemplo, se o nó contiver as chaves `G`, `K` e `P`, e a chave buscada for `J`, a segunda chave (`K`) é a primeira maior `J` (`J` < `K`), então continua-se no nó correspondente ao segundo link. Se a busca fosse pela chave `Q`, que não é menor que nenhuma das chaves do nó, o próximo nó seria o referenciado pelo último link ativo do nó (o quarto link).
 
 ### Inserção
 

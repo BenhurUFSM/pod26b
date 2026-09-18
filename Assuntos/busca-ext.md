@@ -426,25 +426,171 @@ O número de elementos na tabela é sempre uma potência de 2.
 
 Associado a cada bucket está o número de bits usado nas chaves dos registros que estão nesse bucket. Esse número pode ser igual ou menor ao da tabela. Se o número for igual, quer dizer que o bucket corresponde a uma entrada na tabela. Se for menor, quer dizer que mais de uma entrada na tabela aponta para esse bucket.
 
-Pode ficar mais claro com um exemplo. Suponha que a função hash produza valores de 8 bits, e que o arquivo esteja inicialmente vazio. O número de bits da tabela de hash é 0, e o tamanho da tabela de hash é $2^0=1$, e não tem um bucket alocado, com número de bits 0, vazio. Suponha que caibam 2 registros em um bucket.
+Pode ficar mais claro com um exemplo. Suponha que a função hash produza valores de 8 bits, e que o arquivo esteja inicialmente vazio. O número de bits da tabela de hash é 0, e o tamanho da tabela de hash é $2^0=1$, e tem um bucket alocado, com número de bits 0, vazio. Suponha que caibam 2 registros em um bucket.
 
 O estado do índice está representado abaixo.
 À esquerda está a tabela de buckets com o número de bits (0), e sua única entrada apontando para o bucket correspondente. À direita está o bucket, con o número de bits (0) e suas duas entradas vazias.
-
+Os valores entre parênteses (não tem nenhum ainda) são os valores considerados para os bits sendo usados, na entrada da tabela ou no bucket.
 ```mermaid
 block
   columns 9
-  block:l:2
-    nl["0"] space
-    l0[" "]:2
-  end
-  space:2
-  block:b0:5
-  n0["0"] b0a["—"]:2 b0b["—"]:2
-  end
-  l0-->b0
+  nl["0"] space  space:2 space:5
+  l0["()"]:2      space:2 n0["0()"] b0a["—"]:2 b0b["—"]:2
+  l0-->n0
 ```
 
 São então realizadas inserções no arquivo, com chaves e valores de hash, nessa ordem: `A10100`, `B01111`, `C00010`, `D10100`, `E00101`, `F00011`, `G10100`, `H01100`, `I11001`, `J00010`
 
-Na primeira inserção, como a tabela está vazia, 
+Como estão sendo usados 0 bits do valor hash, toda chave que for inserida será colocada no mesmo bucket. Após a inserção dos primeiros dois registros, o estado fica assim:
+```mermaid
+block
+  columns 9
+  nl["0"] space  space:2  space:5
+  l0["()"]:2     space:2  n0["0()"] b0a["A10100"]:2 b0b["B01111"]:2
+  l0-->n0
+```
+A inserção do terceiro registro causa estouro do bucket. A solução é
+- duplicar a tabela de hash, se necessário (se o número de bits no bucket que estourou for igual ao da tabela). A tabela passa então a considerar mais um bit),
+- criar um novo bucket, incrementar (+1) o número de bits do bucket que estourou e colocar esse mesmo número no novo bucket, alterar um dos links para o bucket que estourou para apontar para o novo bucket,
+- redistribuir os valores do bucket que estourou entre os dois buckets, de acordo com o valor do novo bit sendo usado
+- tentar a inserção novamente.
+
+Na duplicação da tabela, cada entrada é duplicada, e cada nova entrada fica apontando para o mesmo bucket da entrada original. Fica assim:
+```mermaid
+block
+  columns 9
+  nl["1"] space  space:2  space:5
+  l0["(0)"]:2    space:2  n0["0()"] b0a["A10100"]:2 b0b["B01111"]:2
+  l1["(1)"]:2    space:2  space:5
+  l0-->n0
+  l1-->n0
+```
+Após a criação do bucket:
+```mermaid
+block
+  columns 9
+  nl["1"] space  space:2  space:5
+  l0["(0)"]:2    space:2  n0["1(0)"] b0a["A10100"]:2 b0b["B01111"]:2
+  l1["(1)"]:2    space:2  n1["1(1)"] b1a["—"]:2 b1b["—"]:2
+  l0-->n0
+  l1-->n1
+```
+Após a redistribuição (considerando o bit mais significativo):
+```mermaid
+block
+  columns 9
+  nl["1"] space  space:2  space:5
+  l0["(0)"]:2    space:2  n0["1(0)"] b0a["B01111"]:2 b0b["—"]:2
+  l1["(1)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["—"]:2
+  l0-->n0
+  l1-->n1
+```
+Após a inserção do terceiro registro:
+```mermaid
+block
+  columns 9
+  nl["1"] space  space:2  space:5
+  l0["(0)"]:2    space:2  n0["1(0)"] b0a["B01111"]:2 b0b["C00010"]:2
+  l1["(1)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["—"]:2
+  l0-->n0
+  l1-->n1
+```
+A inserção do quarto registro (`D10100`) ocorre sem problemas, o bit mais significativo é `1` e no bucket `1` tem espaço:
+```mermaid
+block
+  columns 9
+  nl["1"] space  space:2  space:5
+  l0["(0)"]:2    space:2  n0["1(0)"] b0a["B01111"]:2 b0b["C00010"]:2
+  l1["(1)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l0-->n0
+  l1-->n1
+```
+O quinto registro (`E00101`) tem o bit mais significativo `0`, e o bucket `0` está cheio. O número de bits do bucket é igual ao da tabela, então a tabela é duplicada:
+```mermaid
+block
+  columns 9
+  nl["2"] space  space:2  space:5
+  l0["(00)"]:2    space:2  n0["1(0)"] b0a["B01111"]:2 b0b["C00010"]:2
+  l1["(01)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l2["(10)"]:2    space:2  space:5
+  l3["(11)"]:2    space:2  space:5
+  l0-->n0
+  l1-->n0
+  l2-->n1
+  l3-->n1
+```
+É criado um novo bucket:
+```mermaid
+block
+  columns 9
+  nl["2"] space  space:2  space:5
+  l00["(00)"]:2    space:2  n00["2(00)"] b00a["B01111"]:2 b00b["C00010"]:2
+  l01["(01)"]:2    space:2  n01["2(01)"] b01a["—"]:2 b01b["—"]:2
+  l10["(10)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l11["(11)"]:2    space:2  space:5
+  l00-->n00
+  l01-->n01
+  l10-->n1
+  l11-->n1
+```
+Redistribuindo os valores do bucket que estourou considerando os 2 bits mais significativos e inserindo o `E00101`:
+```mermaid
+block
+  columns 9
+  nl["2"] space  space:2  space:5
+  l00["(00)"]:2    space:2  n00["2(00)"] b00a["C00010"]:2 b00b["E00101"]:2
+  l01["(01)"]:2    space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
+  l10["(10)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l11["(11)"]:2    space:2  space:5
+  l00-->n00
+  l01-->n01
+  l10-->n1
+  l11-->n1
+```
+A inserção de `F00011` estoura o bucket `00`, que é quebrado em `000` e `001`:
+```mermaid
+block
+  columns 9
+  nl["3"] space  space:2  space:5
+  l00["(000)"]:2    space:2  n000["3(000)"] b000a["C00010"]:2 b000b["F00011"]:2
+  l01["(001)"]:2    space:2  n001["3(001)"] b001a["E00101"]:2 b001b["—"]:2
+  l10["(010)"]:2    space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
+  l11["(011)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l00["(100)"]:2    space:2  space:5
+  l01["(101)"]:2    space:2  space:5
+  l10["(110)"]:2    space:2  space:5
+  l11["(111)"]:2    space:2  space:5
+  l000-->n000
+  l001-->n001
+  l010-->n01
+  l011-->n01
+  l100-->n1
+  l101-->n1
+  l110-->n1
+  l111-->n1
+```
+A inserção de `G10100` mostra outro problema, que não tem como ser resolvido aumentando a tabela. Tem um conflito de 3 chaves, em todo o valor do hash. Para resolver esse problema, necessitamos de bucket de estouro. Uma forma de automatizar é controlando a relação entre o número de bits da tabela de buckets (que é o máximo de buckets possível) e o número de buckets existentes, e não permitir o aumento da tabela (nem a divisão de um bucket que tenha o mesmo número de bits que a tabela) caso essa relação seja considerada excessiva.
+
+Usando um bucket de estouro:
+```mermaid
+block
+  columns 9
+  nl["3"] space  space:2  space:5
+  l00["(000)"]:2    space:2  n000["3(000)"] b000a["C00010"]:2 b000b["F00011"]:2
+  l01["(001)"]:2    space:2  n001["3(001)"] b001a["E00101"]:2 b001b["—"]:2
+  l10["(010)"]:2    space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
+  l11["(011)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l00["(100)"]:2    space:2  n1x[" "] b1ax["G10100"]:2 b1bx["—"]:2
+  l01["(101)"]:2    space:2  space:5
+  l10["(110)"]:2    space:2  space:5
+  l11["(111)"]:2    space:2  space:5
+  l000-->n000
+  l001-->n001
+  l010-->n01
+  l011-->n01
+  l100-->n1
+  l101-->n1
+  l110-->n1
+  l111-->n1
+  n1-->n1x
+```

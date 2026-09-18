@@ -592,5 +592,6 @@ block
   l101-->n1
   l110-->n1
   l111-->n1
-  b1b-->n1x
+  n1-->n1x
 ```
+As demais inserções ficam como exercício.

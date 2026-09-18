@@ -76,6 +76,7 @@ Os assuntos vistos em aula serão listados aqui.
 |   11 |   8set | busca em memória externa, índice hash
 |   12 |  10set | busca em memória externa, índice multidimensional
 |   13 |  15set | busca em memória externa, índice multidimensional
+|   15 |  17set | busca em memória externa, índice multidimensional
 
 ## Exercícios, trabalhos
 

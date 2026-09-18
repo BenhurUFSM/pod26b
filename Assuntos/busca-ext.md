@@ -396,3 +396,55 @@ block
 #### Exercícios
 
 Faça as inserções que faltaram, e continue as remoções, sempre da maior chave, até esvaziar a árvore.
+
+
+### Índice hash
+
+Da mesma forma que em uma tabela hash, usa-se uma função hash nos valores da chave para distribuir os registros de dados em posições da tabela.
+Aqui, implementa-se uma tabela de *buckets*, um local de armazenamento onde podem ser colocados vários links para registros de dados. Um bucket pode ser implementado como um bloco ou um conjunto de blocos de disco.
+Decide-se o número de buckets de acordo com a capacidade de cada bucket, o tamanho do arquivo e o número de registros esperado em cada bucket.
+
+Para encontrar um registro, usa-se a função hash na chave procurada para calcular o número do bucket, e então procura-se entre os registros desse buchet (que devem ter pares chave-link) aquele que tem a chave procurada, e encontra-se o link para o registro de dados correspondente. A organização dos registros dentro de um bucket pode ser organizada de forma a acelerar essa busca, já que em geral tem um número maior de colisões que o esperado em uma tabela hash mantida em memória. Um bucket pode também conter o registro de dados completo, em vez de um link para um arquivo de dados.
+
+Caso se tenha buckets insuficientes para o volume de dados e/ou se tenha uma função hash que não realiza a distribuição uniforme dos registros entre os buckets, pode acontecer o estouro de bucket, que é quando se tem mais registros que compartilham o mesmo hash do que cabem em um bucket. A solução mais comum para esse problema é utilizar buckets de estouro, formando listas encadeadas de buckets.
+
+Com um número fixo de buckets (que se chama de hashing estático), tem-se problemas semelhantes aos de uma tabela hash de tamanho fixo:
+- se esse número for muito pequeno, tem-se muitos estouros de buckets, reduzindo o desempenho.
+- se esse número for muito grande, tem-se desperdício de espaço.
+- se o número de registros no arquivo for muito dinâmico, não tem como calcular um bom número de buckets.
+
+A solução de se alterar e número de buckets e refazer todo o índice é geralmente considerada cara demais (ainda mais que o índice está em memória secundária). Outra solução é um hashing dinâmico, como o *hashing extensível*.
+
+#### Hashing extensível
+
+Nessa forma de hash, a função hash gera um valor contendo um certo número de bits (por exemplo, 32). Esse valor não é usado diretamente para endereçar um bucket.
+Em vez disso, usa-se o valor formado por alguns de seus bits menos (ou mais) significativos.
+Esses bits formam um número que é usado para indexar uma tabela de buckets, e essa tabela aponta para os buckets.
+
+Associado à tabela de buckets está o número de bits usado para indexá-la.
+O número de elementos na tabela é sempre uma potência de 2.
+
+Associado a cada bucket está o número de bits usado nas chaves dos registros que estão nesse bucket. Esse número pode ser igual ou menor ao da tabela. Se o número for igual, quer dizer que o bucket corresponde a uma entrada na tabela. Se for menor, quer dizer que mais de uma entrada na tabela aponta para esse bucket.
+
+Pode ficar mais claro com um exemplo. Suponha que a função hash produza valores de 8 bits, e que o arquivo esteja inicialmente vazio. O número de bits da tabela de hash é 0, e o tamanho da tabela de hash é $2^0=1$, e não tem um bucket alocado, com número de bits 0, vazio. Suponha que caibam 2 registros em um bucket.
+
+O estado do índice está representado abaixo.
+À esquerda está a tabela de buckets com o número de bits (0), e sua única entrada apontando para o bucket correspondente. À direita está o bucket, con o número de bits (0) e suas duas entradas vazias.
+
+```mermaid
+block
+  columns 9
+  block:l:2
+    nl["0"] space
+    l0[" "]:2
+  end
+  space:2
+  block:b0:5
+  n0["0"] b0a["—"]:2 b0b["—"]:2
+  end
+  l0-->b0
+```
+
+São então realizadas inserções no arquivo, com chaves e valores de hash, nessa ordem: `A10100`, `B01111`, `C00010`, `D10100`, `E00101`, `F00011`, `G10100`, `H01100`, `I11001`, `J00010`
+
+Na primeira inserção, como a tabela está vazia, 

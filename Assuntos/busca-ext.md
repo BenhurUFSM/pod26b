@@ -393,44 +393,49 @@ block
   i3l1-->f8
   i3l2-->f2
 ```
+
+#### Complexidade das operações em uma árvore B+
+
+Em tempo, as operações de busca, inserção e remoção têm complexidade $O(\log n)$, tanto na média quanto no pior caso. Em espaço, a complexidade é $O(n)$.
+
 #### Exercícios
 
 Faça as inserções que faltaram, e continue as remoções, sempre da maior chave, até esvaziar a árvore.
 
 
-### Índice hash
+### Índice *hash*
 
-Da mesma forma que em uma tabela hash, usa-se uma função hash nos valores da chave para distribuir os registros de dados em posições da tabela.
-Aqui, implementa-se uma tabela de *buckets*, um local de armazenamento onde podem ser colocados vários links para registros de dados. Um bucket pode ser implementado como um bloco ou um conjunto de blocos de disco.
-Decide-se o número de buckets de acordo com a capacidade de cada bucket, o tamanho do arquivo e o número de registros esperado em cada bucket.
+Da mesma forma que em uma tabela *hash*, usa-se uma função *hash* nos valores da chave para distribuir os registros de dados em posições da tabela.
+Aqui, implementa-se uma tabela de *buckets*, um local de armazenamento onde podem ser colocados vários links para registros de dados. Um *bucket* pode ser implementado como um bloco ou um conjunto de blocos de disco.
+Decide-se o número de *buckets* de acordo com a capacidade de cada *bucket*, o tamanho do arquivo e o número de registros esperado em cada *bucket*.
 
-Para encontrar um registro, usa-se a função hash na chave procurada para calcular o número do bucket, e então procura-se entre os registros desse buchet (que devem ter pares chave-link) aquele que tem a chave procurada, e encontra-se o link para o registro de dados correspondente. A organização dos registros dentro de um bucket pode ser organizada de forma a acelerar essa busca, já que em geral tem um número maior de colisões que o esperado em uma tabela hash mantida em memória. Um bucket pode também conter o registro de dados completo, em vez de um link para um arquivo de dados.
+Para encontrar um registro, usa-se a função *hash* na chave procurada para calcular o número do *bucket*, e então procura-se entre os registros desse buchet (que devem ter pares chave-link) aquele que tem a chave procurada, e encontra-se o link para o registro de dados correspondente. A organização dos registros dentro de um *bucket* pode ser organizada de forma a acelerar essa busca, já que em geral tem um número maior de colisões que o esperado em uma tabela *hash* mantida em memória. Um *bucket* pode também conter o registro de dados completo, em vez de um link para um arquivo de dados.
 
-Caso se tenha buckets insuficientes para o volume de dados e/ou se tenha uma função hash que não realiza a distribuição uniforme dos registros entre os buckets, pode acontecer o estouro de bucket, que é quando se tem mais registros que compartilham o mesmo hash do que cabem em um bucket. A solução mais comum para esse problema é utilizar buckets de estouro, formando listas encadeadas de buckets.
+Caso se tenha *buckets* insuficientes para o volume de dados e/ou se tenha uma função *hash* que não realiza a distribuição uniforme dos registros entre os *buckets*, pode acontecer o estouro de *bucket*, que é quando se tem mais registros que compartilham o mesmo *hash* do que cabem em um *bucket*. A solução mais comum para esse problema é utilizar *buckets* de estouro, formando listas encadeadas de *buckets*.
 
-Com um número fixo de buckets (que se chama de hashing estático), tem-se problemas semelhantes aos de uma tabela hash de tamanho fixo:
-- se esse número for muito pequeno, tem-se muitos estouros de buckets, reduzindo o desempenho.
+Com um número fixo de *buckets* (que se chama de *hash*ing estático), tem-se problemas semelhantes aos de uma tabela *hash* de tamanho fixo:
+- se esse número for muito pequeno, tem-se muitos estouros de *buckets*, reduzindo o desempenho.
 - se esse número for muito grande, tem-se desperdício de espaço.
-- se o número de registros no arquivo for muito dinâmico, não tem como calcular um bom número de buckets.
+- se o número de registros no arquivo for muito dinâmico, não tem como calcular um bom número de *buckets*.
 
-A solução de se alterar e número de buckets e refazer todo o índice é geralmente considerada cara demais (ainda mais que o índice está em memória secundária). Outra solução é um hashing dinâmico, como o *hashing extensível*.
+A solução de se alterar e número de *buckets* e refazer todo o índice é geralmente considerada cara demais (ainda mais que o índice está em memória secundária). Outra solução é um *hash*ing dinâmico, como o *hashing extensível*.
 
-#### Hashing extensível
+#### *hash*ing extensível
 
-Nessa forma de hash, a função hash gera um valor contendo um certo número de bits (por exemplo, 32). Esse valor não é usado diretamente para endereçar um bucket.
+Nessa forma de *hash*, a função *hash* gera um valor contendo um certo número de bits (por exemplo, 32). Esse valor não é usado diretamente para endereçar um *bucket*.
 Em vez disso, usa-se o valor formado por alguns de seus bits menos (ou mais) significativos.
-Esses bits formam um número que é usado para indexar uma tabela de buckets, e essa tabela aponta para os buckets.
+Esses bits formam um número que é usado para indexar uma tabela de *buckets*, e essa tabela aponta para os *buckets*.
 
-Associado à tabela de buckets está o número de bits usado para indexá-la.
+Associado à tabela de *buckets* está o número de bits usado para indexá-la.
 O número de elementos na tabela é sempre uma potência de 2.
 
-Associado a cada bucket está o número de bits usado nas chaves dos registros que estão nesse bucket. Esse número pode ser igual ou menor ao da tabela. Se o número for igual, quer dizer que o bucket corresponde a uma entrada na tabela. Se for menor, quer dizer que mais de uma entrada na tabela aponta para esse bucket.
+Associado a cada *bucket* está o número de bits usado nas chaves dos registros que estão nesse *bucket*. Esse número pode ser igual ou menor ao da tabela. Se o número for igual, quer dizer que o *bucket* corresponde a uma entrada na tabela. Se for menor, quer dizer que mais de uma entrada na tabela aponta para esse *bucket*.
 
-Pode ficar mais claro com um exemplo. Suponha que a função hash produza valores de 8 bits, e que o arquivo esteja inicialmente vazio. O número de bits da tabela de hash é 0, e o tamanho da tabela de hash é $2^0=1$, e tem um bucket alocado, com número de bits 0, vazio. Suponha que caibam 2 registros em um bucket.
+Pode ficar mais claro com um exemplo. Suponha que a função *hash* produza valores de 8 bits, e que o arquivo esteja inicialmente vazio. O número de bits da tabela de *buckets* é 0, e o tamanho da tabela de *buckets* é $2^0=1$, e tem um *bucket* alocado, com número de bits 0, vazio. Suponha que caibam 2 registros em um *bucket*.
 
 O estado do índice está representado abaixo.
-À esquerda está a tabela de buckets com o número de bits (0), e sua única entrada apontando para o bucket correspondente. À direita está o bucket, con o número de bits (0) e suas duas entradas vazias.
-Os valores entre parênteses (não tem nenhum ainda) são os valores considerados para os bits sendo usados, na entrada da tabela ou no bucket.
+À esquerda está a tabela de *buckets* com o número de bits (0), e sua única entrada apontando para o *bucket* correspondente. À direita está o *bucket*, con o número de bits (0) e suas duas entradas vazias.
+Os valores entre parênteses (não tem nenhum ainda) são os valores considerados para os bits sendo usados, na entrada da tabela ou no *bucket*.
 ```mermaid
 block
   columns 9
@@ -439,9 +444,9 @@ block
   l0-->n0
 ```
 
-São então realizadas inserções no arquivo, com chaves e valores de hash, nessa ordem: `A10100`, `B01111`, `C00010`, `D10100`, `E00101`, `F00011`, `G10100`, `H01100`, `I11001`, `J00010`
+São então realizadas inserções no arquivo, com chaves e valores de *hash*, nessa ordem: `A10100`, `B01111`, `C00010`, `D10100`, `E00101`, `F00011`, `G10100`, `H11100`, `I11001`, `J00010`
 
-Como estão sendo usados 0 bits do valor hash, toda chave que for inserida será colocada no mesmo bucket. Após a inserção dos primeiros dois registros, o estado fica assim:
+Como estão sendo usados 0 bits do valor *hash*, toda chave que for inserida será colocada no mesmo *bucket*. Após a inserção dos primeiros dois registros, o estado fica assim:
 ```mermaid
 block
   columns 9
@@ -449,13 +454,13 @@ block
   l0["()"]:2     space:2  n0["0()"] b0a["A10100"]:2 b0b["B01111"]:2
   l0-->n0
 ```
-A inserção do terceiro registro causa estouro do bucket. A solução é
-- duplicar a tabela de hash, se necessário (se o número de bits no bucket que estourou for igual ao da tabela). A tabela passa então a considerar mais um bit),
-- criar um novo bucket, incrementar (+1) o número de bits do bucket que estourou e colocar esse mesmo número no novo bucket, alterar um dos links para o bucket que estourou para apontar para o novo bucket,
-- redistribuir os valores do bucket que estourou entre os dois buckets, de acordo com o valor do novo bit sendo usado
+A inserção do terceiro registro causa estouro do *bucket*. A solução é
+- duplicar a tabela de *buckets*, se necessário (se o número de bits no *bucket* que estourou for igual ao da tabela). A tabela passa então a considerar mais um bit),
+- criar um novo *bucket*, incrementar (+1) o número de bits do *bucket* que estourou e colocar esse mesmo número no novo *bucket*, alterar um dos links para o *bucket* que estourou para apontar para o novo *bucket*,
+- redistribuir os valores do *bucket* que estourou entre os dois *buckets*, de acordo com o valor do novo bit sendo usado
 - tentar a inserção novamente.
 
-Na duplicação da tabela, cada entrada é duplicada, e cada nova entrada fica apontando para o mesmo bucket da entrada original. Fica assim:
+Na duplicação da tabela, cada entrada é duplicada, e cada nova entrada fica apontando para o mesmo *bucket* da entrada original. No exemplo, fica assim:
 ```mermaid
 block
   columns 9
@@ -465,7 +470,7 @@ block
   l0-->n0
   l1-->n0
 ```
-Após a criação do bucket:
+Após a criação do *bucket*:
 ```mermaid
 block
   columns 9
@@ -495,7 +500,7 @@ block
   l0-->n0
   l1-->n1
 ```
-A inserção do quarto registro (`D10100`) ocorre sem problemas, o bit mais significativo é `1` e no bucket `1` tem espaço:
+A inserção do quarto registro (`D10100`) ocorre sem problemas, o bit mais significativo é `1` e no *bucket* `1` tem espaço:
 ```mermaid
 block
   columns 9
@@ -505,61 +510,61 @@ block
   l0-->n0
   l1-->n1
 ```
-O quinto registro (`E00101`) tem o bit mais significativo `0`, e o bucket `0` está cheio. O número de bits do bucket é igual ao da tabela, então a tabela é duplicada:
+O quinto registro (`E00101`) tem o bit mais significativo `0`, e o *bucket* `0` está cheio. O número de bits do *bucket* é igual ao da tabela, então a tabela é duplicada:
 ```mermaid
 block
   columns 9
   nl["2"] space  space:2  space:5
-  l0["(00)"]:2    space:2  n0["1(0)"] b0a["B01111"]:2 b0b["C00010"]:2
-  l1["(01)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
-  l2["(10)"]:2    space:2  space:5
-  l3["(11)"]:2    space:2  space:5
+  l0["(00)"]:2   space:2  n0["1(0)"] b0a["B01111"]:2 b0b["C00010"]:2
+  l1["(01)"]:2   space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l2["(10)"]:2   space:2  space:5
+  l3["(11)"]:2   space:2  space:5
   l0-->n0
   l1-->n0
   l2-->n1
   l3-->n1
 ```
-É criado um novo bucket:
+É criado um novo *bucket*:
 ```mermaid
 block
   columns 9
   nl["2"] space  space:2  space:5
-  l00["(00)"]:2    space:2  n00["2(00)"] b00a["B01111"]:2 b00b["C00010"]:2
-  l01["(01)"]:2    space:2  n01["2(01)"] b01a["—"]:2 b01b["—"]:2
-  l10["(10)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
-  l11["(11)"]:2    space:2  space:5
+  l00["(00)"]:2  space:2  n00["2(00)"] b00a["B01111"]:2 b00b["C00010"]:2
+  l01["(01)"]:2  space:2  n01["2(01)"] b01a["—"]:2 b01b["—"]:2
+  l10["(10)"]:2  space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l11["(11)"]:2  space:2  space:5
   l00-->n00
   l01-->n01
   l10-->n1
   l11-->n1
 ```
-Redistribuindo os valores do bucket que estourou considerando os 2 bits mais significativos e inserindo o `E00101`:
+Redistribuindo os valores do *bucket* que estourou considerando os 2 bits mais significativos e inserindo o `E00101`:
 ```mermaid
 block
   columns 9
   nl["2"] space  space:2  space:5
-  l00["(00)"]:2    space:2  n00["2(00)"] b00a["C00010"]:2 b00b["E00101"]:2
-  l01["(01)"]:2    space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
-  l10["(10)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
-  l11["(11)"]:2    space:2  space:5
+  l00["(00)"]:2  space:2  n00["2(00)"] b00a["C00010"]:2 b00b["E00101"]:2
+  l01["(01)"]:2  space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
+  l10["(10)"]:2  space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l11["(11)"]:2  space:2  space:5
   l00-->n00
   l01-->n01
   l10-->n1
   l11-->n1
 ```
-A inserção de `F00011` estoura o bucket `00`, que é quebrado em `000` e `001`:
+A inserção de `F00011` estoura o *bucket* `00`, que é quebrado em `000` e `001`:
 ```mermaid
 block
   columns 9
-  nl["3"] space  space:2  space:5
-  l000["(000)"]:2    space:2  n000["3(000)"] b000a["C00010"]:2 b000b["F00011"]:2
-  l001["(001)"]:2    space:2  n001["3(001)"] b001a["E00101"]:2 b001b["—"]:2
-  l010["(010)"]:2    space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
-  l011["(011)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
-  l100["(100)"]:2    space:2  space:5
-  l101["(101)"]:2    space:2  space:5
-  l110["(110)"]:2    space:2  space:5
-  l111["(111)"]:2    space:2  space:5
+  nl["3"] space    space:2  space:5
+  l000["(000)"]:2  space:2  n000["3(000)"] b000a["C00010"]:2 b000b["F00011"]:2
+  l001["(001)"]:2  space:2  space:5
+  l010["(010)"]:2  space:2  n001["3(001)"] b001a["E00101"]:2 b001b["—"]:2
+  l011["(011)"]:2  space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
+  l100["(100)"]:2  space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l101["(101)"]:2  space:2  space:5
+  l110["(110)"]:2  space:2  space:5
+  l111["(111)"]:2  space:2  space:5
   l000-->n000
   l001-->n001
   l010-->n01
@@ -569,21 +574,22 @@ block
   l110-->n1
   l111-->n1
 ```
-A inserção de `G10100` mostra outro problema, que não tem como ser resolvido aumentando a tabela. Tem um conflito de 3 chaves, em todo o valor do hash. Para resolver esse problema, necessitamos de bucket de estouro. Uma forma de automatizar é controlando a relação entre o número de bits da tabela de buckets (que é o máximo de buckets possível) e o número de buckets existentes, e não permitir o aumento da tabela (nem a divisão de um bucket que tenha o mesmo número de bits que a tabela) caso essa relação seja considerada excessiva.
+A inserção de `G10100` mostra outro problema, que não tem como ser resolvido aumentando a tabela. Tem um conflito de 3 chaves, em todo o valor do *hash*. Para resolver esse problema, necessitamos de *bucket* de estouro. Uma forma de automatizar é controlando a relação entre o número de bits da tabela de *buckets* (que é o máximo de *buckets* possível) e o número de *buckets* existentes, e não permitir o aumento da tabela (nem a divisão de um *bucket* que tenha o mesmo número de bits que a tabela) caso essa relação seja considerada excessiva.
+Dá também para analisar as chaves existentes no *bucket* que estourou para verificar quantos bits teriam que ser adicionados para que a divisão fosse útil.
 
-Usando um bucket de estouro:
+Usando um *bucket* de estouro:
 ```mermaid
 block
   columns 9
-  nl["3"] space  space:2  space:5
-  l000["(000)"]:2    space:2  n000["3(000)"] b000a["C00010"]:2 b000b["F00011"]:2
-  l001["(001)"]:2    space:2  n001["3(001)"] b001a["E00101"]:2 b001b["—"]:2
-  l010["(010)"]:2    space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
-  l011["(011)"]:2    space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
-  l100["(100)"]:2    space:2  space:5
-  l101["(101)"]:2    space:2  n1x[" "] b1ax["G10100"]:2 b1bx["—"]:2
-  l110["(110)"]:2    space:2  space:5
-  l111["(111)"]:2    space:2  space:5
+  nl["3"] space    space:2  space:5
+  l000["(000)"]:2  space:2  space:5
+  l001["(001)"]:2  space:2  n000["3(000)"] b000a["C00010"]:2 b000b["F00011"]:2
+  l010["(010)"]:2  space:2  n001["3(001)"] b001a["E00101"]:2 b001b["—"]:2
+  l011["(011)"]:2  space:2  n01["2(01)"] b01a["B01111"]:2 b01b["—"]:2
+  l100["(100)"]:2  space:2  n1["1(1)"] b1a["A10100"]:2 b1b["D10100"]:2
+  l101["(101)"]:2  space:2  space:5
+  l110["(110)"]:2  space:2  n1x[" "] b1ax["G10100"]:2 b1bx["—"]:2
+  l111["(111)"]:2  space:2  space:5
   l000-->n000
   l001-->n001
   l010-->n01
@@ -595,3 +601,8 @@ block
   n1-->n1x
 ```
 As demais inserções ficam como exercício.
+
+Na remoção, observa-se a ocupação de um *bucket* e a conveniência de mesclá-lo com seu "vizinho de bit". Quando essa junção acontece, verifica-se a possibilidade de reduzir a tabela de *buckets* pela metade.
+
+Para otimizar espaço, a tabela pode ser implementada como uma *trie*.
+

@@ -201,7 +201,7 @@ columns 2
 c3["b"] v3["4"]
 end
 d20["1"] d21["1"] d22["0"]
-block:b3:2
+block:b4:2
 columns 2
 c4["d"] v4["4"]
 end
@@ -211,7 +211,7 @@ d30["1"] d31["1"] d32["1"]
 block
   columns 5
   block:b0:2
-    columns:2
+    columns 2
     block:b1:2
       columns 2
       c1["a"] v1["10"]

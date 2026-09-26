@@ -88,8 +88,8 @@ columns 6
 a 10  space:2 space r(("bd")) space
 bd 8  space:4
 c 6   space:2 re(("b")) space rd(("d"))
-r--0->re
-r--1->rd
+r--"0"-->re
+r--"1"-->rd
 ```
 Após o segundo passo:
 ```mermaid
@@ -131,7 +131,7 @@ Essa codificação usa uma forma diferente de obter os códigos para cada símbo
 ```mermaid
 block
 columns 3
-block:a:2
+block:b1:2
 columns 2
 a 10
 c  6

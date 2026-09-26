@@ -161,7 +161,7 @@ c4["d"] v4["4"]
 end
 1
 ```
-Na segunda divisão, a primeira tabela já tem só uma entrada, a segunda é dividida entre `6` e `4 4`:
+Na segunda divisão, a primeira subtabela já tem só uma entrada, a segunda é dividida entre `6` e `4 4`:
 ```mermaid
 block
 columns 4
@@ -182,7 +182,21 @@ c4["d"] v4["4"]
 end
 d20["1"] d21["1"]
 ```
-Na terceira divisão, só restou uma tabela com mais de 1 valor, é dividida em duas:
+```mermaid
+block
+columns 4
+c1["a"] v1["10"] d0["0"] space
+c2["c"] v2["6"] d10["1"] d11["0"]
+block:b3:4
+columns 4
+block:b31:2
+c3["b"] v3["4"]
+c4["d"] v4["4"]
+end
+d20["1"] d21["1"]
+end
+```
+Na terceira divisão, só restou uma subtabela com mais de 1 valor, é dividida em duas:
 ```mermaid
 block
 columns 5
@@ -207,47 +221,4 @@ c4["d"] v4["4"]
 end
 d30["1"] d31["1"] d32["1"]
 ```
-```mermaid
-block
-  columns 5
-  block:b0:2
-    columns 2
-    block:b01:2
-      columns 2
-      c1["a"] v1["10"]
-    end
-    block:b02:2
-      columns 2
-      c2["c"] v2["6"]
-    end
-    block:b03:2
-      columns 2
-      c3["b"] v3["4"]
-    end
-    block:b04:2
-      columns 2
-      c4["d"] v4["4"]
-    end
-  end
-
-  block:b1:3
-    columns 3
-    d0["0"] space:2
-    block:b10:1
-      d10["1"]
-    end
-    block:b11:2
-      columns 2
-      d11["0"] space
-      block:b21:1
-        d210["1"]
-      end
-      block:b22:1
-        d31["0"]
-        d32["1"]
-      end
-    end
-  end
-```
-
-Todas as tabelas agora tem um só código. Os códigos são `0` para `a`, `10` para `c`, `110` para `b` e `110` para `d`.
+Todas as subtabelas agora tem um só código. Os códigos são `0` para `a`, `10` para `c`, `110` para `b` e `110` para `d`.

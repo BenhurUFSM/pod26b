@@ -100,10 +100,10 @@ a 10    space:6
 space:2 space:2 space re(("bd")) space rd(("c"))
 space:2 space:6
 space:2 space:2 ree(("b")) space red(("d")) space
-r--0->re
-r--1->rd
-re--0->ree
-re--1->red
+r--"0"-->re
+r--"1"-->rd
+re--"0"-->ree
+re--"1"-->red
 ```
 Após o terceiro e último passo:
 ```mermaid

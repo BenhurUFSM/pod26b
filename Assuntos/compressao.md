@@ -169,17 +169,17 @@ block:b1:2
 columns 2
 c1["a"] v1["10"]
 end
-0 space
+d0["0"] space
 block:b2:2
 columns 2
 c2["c"] v2["6"]
 end
-1 0
+d10["1"] d11["0"]
 block:b3:2
 columns 2
 c3["b"] v3["4"]
 c4["d"] v4["4"]
 end
-1 1
+d20["1"] d21["1"]
 ```
 

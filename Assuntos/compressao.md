@@ -182,4 +182,65 @@ c4["d"] v4["4"]
 end
 d20["1"] d21["1"]
 ```
+Na terceira divisão, só restou uma tabela com mais de 1 valor, é dividida em duas:
+```mermaid
+block
+columns 5
+block:b1:2
+columns 2
+c1["a"] v1["10"]
+end
+d0["0"] space:2
+block:b2:2
+columns 2
+c2["c"] v2["6"]
+end
+d10["1"] d11["0"] space
+block:b3:2
+columns 2
+c3["b"] v3["4"]
+end
+d20["1"] d21["1"] d31["0"]
+block:b3:2
+columns 2
+c4["d"] v4["4"]
+end
+d30["1"] d31["1"] d32["1"]
+```
+```mermaid
+block
+columns 5
 
+block:b0:2
+columns:2
+block:b1:2
+columns 2
+c1["a"] v1["10"]
+end
+block:b2:2
+columns 2
+c2["c"] v2["6"]
+end
+block:b3:2
+columns 2
+c3["b"] v3["4"]
+end
+block:b4:2
+columns 2
+c4["d"] v4["4"]
+end
+end
+block:b10:3
+d0["0"] space:2
+block:b11:1
+d11["1"]
+end
+d11["0"] space
+block:b21:1
+d210["1"]
+end
+d31["0"]
+d32["1"]
+```
+
+Todas as tabelas agora tem um só código. Os códigos são `0` para `a`, `10` para `c`, `110` para `b` e `110` para `d`.

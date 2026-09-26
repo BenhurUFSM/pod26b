@@ -75,19 +75,19 @@ Para o exemplo acima, `aabcccbaadacabaccadddaab`, a tabela seria:
 ```mermaid
 block
 columns 2
-a 10
-c  6
-b  4
-d  4
+c1["a"] v1["10"]
+c2["c"] v2["6"]
+c3["b"] v3["4"]
+c4["d"] v4["4"]
 ```
 A cada passo, remove-se as duas entradas mais baixas da tabela, cria-se um nó na árvore que é o pai dos nós que representam esses dois valores, e insere-se na tabela uma entrada que corresponde ao nó criado e tem como valor a soma dos dois valores retirados.
 No exemplo, ficaria:
 ```mermaid
 block
-columns 6
-a 10  space:2 space r(("bd")) space
-bd 8  space:4
-c 6   space:2 re(("b")) space rd(("d"))
+columns 7
+c1["a"] v1["10"]  space:2 space r(("bd")) space
+c2["bd"] v2["8"]  space:5
+c3["c"] v3["6"]   space:2 re(("b")) space rd(("d"))
 r--"0"-->re
 r--"1"-->rd
 ```

@@ -190,6 +190,7 @@ c2["c"] v2["6"] d10["1"] d11["0"]
 block:b3:4
 columns 4
 block:b31:2
+columns 2
 c3["b"] v3["4"]
 c4["d"] v4["4"]
 end

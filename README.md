@@ -77,6 +77,7 @@ Os assuntos vistos em aula serão listados aqui.
 |   12 |  10set | busca em memória externa, índice multidimensional
 |   13 |  15set | busca em memória externa, índice multidimensional
 |   15 |  17set | busca em memória externa, índice multidimensional
+|   16 |  22set | compressão de dados
 
 ## Exercícios, trabalhos
 

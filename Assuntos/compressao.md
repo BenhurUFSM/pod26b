@@ -84,22 +84,22 @@ A cada passo, remove-se as duas entradas mais baixas da tabela, cria-se um nó n
 No exemplo, ficaria:
 ```mermaid
 block
-columns 7
-c1["a"] v1["10"]  space:2 space r(("bd")) space
-c2["bd"] v2["8"]  space:5
-c3["c"] v3["6"]   space:2 re(("b")) space rd(("d"))
+columns 6
+c1["a"] v1["10"]  space:1 space r(("bd")) space
+c2["bd"] v2["8"]  space:4
+c3["c"] v3["6"]   space:1 re(("b")) space rd(("d"))
 r--"0"-->re
 r--"1"-->rd
 ```
 Após o segundo passo:
 ```mermaid
 block
-columns 8
-bdc 14  space:2 space:2 r(("bdc")) space
-a 10    space:6
-space:2 space:2 space re(("bd")) space rd(("c"))
-space:2 space:6
-space:2 space:2 ree(("b")) space red(("d")) space
+columns 7
+bdc 14  space:1 space:2 r(("bdc")) space
+a 10    space:5
+space:2 space:1 space re(("bd")) space rd(("c"))
+space:2 space:5
+space:2 space:1 ree(("b")) space red(("d")) space
 r--"0"-->re
 r--"1"-->rd
 re--"0"-->ree
@@ -109,19 +109,19 @@ Após o terceiro e último passo:
 ```mermaid
 block
 columns 8
-bdca 24 space:2 space:3 r(("bdca")) space
-space:2 space:7
-space:2 space:2 space:2 re(("bdc")) space rd(("a"))
-space:2 space:7
-space:2 space:2 space ree(("bd")) space red(("c")) space
-space:2 space:7
-space:2 space:2 reee(("b")) space reed(("d")) space space
-r--0->re
-r--1->rd
-re--0->ree
-re--1->red
-ree--0->reee
-ree--1->reed
+bdca 24 space:1 space:3 r(("bdca")) space
+space:2 space:6
+space:2 space:1 space:2 re(("bdc")) space rd(("a"))
+space:2 space:6
+space:2 space:1 space ree(("bd")) space red(("c")) space
+space:2 space:6
+space:2 space:1 reee(("b")) space reed(("d")) space space
+r--"0"-->re
+r--"1"-->rd
+re--"0"-->ree
+re--"1"-->red
+ree--"0"-->reee
+ree--"1"-->reed
 ```
 Percorrendo a árvore, o código para `a` é `1`, o código para `b` é `000`, para `c` é `01` e para `d` é `001`.
 
@@ -133,10 +133,10 @@ block
 columns 3
 block:b1:2
 columns 2
-a 10
-c  6
-b  4
-d  4
+c1["a"] v1["10"]
+c2["c"] v2["6"]
+c3["b"] v3["4"]
+c4["d"] v4["4"]
 end
 24
 ```
@@ -147,10 +147,14 @@ Na primeira divisão da tabela acima, poderia dividir em `a` com o valor 10 de u
 A primeira é mais próxima da metade:
 ```mermaid
 block
+columns 3
+block:b1:2
 columns 2
-a 10
-c  6
-b  4
-d  4
+c1["a"] v1["10"]
+c2["c"] v2["6"]
+c3["b"] v3["4"]
+c4["d"] v4["4"]
+end
+24
 ```
 

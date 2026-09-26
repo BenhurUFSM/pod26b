@@ -200,7 +200,7 @@ block:b3:2
 columns 2
 c3["b"] v3["4"]
 end
-d20["1"] d21["1"] d31["0"]
+d20["1"] d21["1"] d22["0"]
 block:b3:2
 columns 2
 c4["d"] v4["4"]
@@ -231,7 +231,7 @@ block
   end
 
   block:b10:3
-    columns:3
+    columns 3
     d0["0"] space:2
     block:b11:1
       d11["1"]

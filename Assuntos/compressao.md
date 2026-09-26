@@ -182,21 +182,6 @@ c4["d"] v4["4"]
 end
 d20["1"] d21["1"]
 ```
-```mermaid
-block
-columns 4
-c1["a"] v1["10"] d0["0"] space
-c2["c"] v2["6"] d10["1"] d11["0"]
-block:b3:4
-columns 4
-block:b31:2
-columns 2
-c3["b"] v3["4"]
-c4["d"] v4["4"]
-end
-d20["1"] d21["1"]
-end
-```
 Na terceira divisão, só restou uma subtabela com mais de 1 valor, é dividida em duas:
 ```mermaid
 block

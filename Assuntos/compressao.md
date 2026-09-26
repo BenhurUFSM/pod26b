@@ -175,7 +175,7 @@ columns 2
 c2["c"] v2["6"]
 end
 1 0
-block:b2:2
+block:b3:2
 columns 2
 c3["b"] v3["4"]
 c4["d"] v4["4"]

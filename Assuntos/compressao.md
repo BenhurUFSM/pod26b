@@ -147,14 +147,20 @@ Na primeira divisão da tabela acima, poderia dividir em `a` com o valor 10 de u
 A primeira é mais próxima da metade:
 ```mermaid
 block
-columns 3
+columns 4
 block:b1:2
 columns 2
 c1["a"] v1["10"]
+end
+0
+10
+block:b2:2
+columns 2
 c2["c"] v2["6"]
 c3["b"] v3["4"]
 c4["d"] v4["4"]
 end
-24
+1
+14
 ```
 

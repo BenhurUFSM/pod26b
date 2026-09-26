@@ -212,36 +212,41 @@ block
   columns 5
   block:b0:2
     columns 2
-    block:b1:2
+    block:b01:2
       columns 2
       c1["a"] v1["10"]
     end
-    block:b2:2
+    block:b02:2
       columns 2
       c2["c"] v2["6"]
     end
-    block:b3:2
+    block:b03:2
       columns 2
       c3["b"] v3["4"]
     end
-    block:b4:2
+    block:b04:2
       columns 2
       c4["d"] v4["4"]
     end
   end
 
-  block:b10:3
+  block:b1:3
     columns 3
     d0["0"] space:2
-    block:b11:1
-      d11["1"]
+    block:b10:1
+      d10["1"]
     end
-    d11["0"] space
-    block:b21:1
-      d210["1"]
+    block:b11:2
+      columns 2
+      d11["0"] space
+      block:b21:1
+        d210["1"]
+      end
+      block:b22:1
+        d31["0"]
+        d32["1"]
+      end
     end
-    d31["0"]
-    d32["1"]
   end
 ```
 

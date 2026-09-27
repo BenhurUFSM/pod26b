@@ -396,7 +396,7 @@ block
 
 #### Complexidade das operações em uma árvore B+
 
-Em tempo, as operações de busca, inserção e remoção têm complexidade $O(\log n)$, tanto na média quanto no pior caso. Em espaço, a complexidade é $O(n)$.
+Em tempo, as operações de busca, inserção e remoção em uma árvore B+ têm complexidade $O(\log n)$, tanto na média quanto no pior caso. Em espaço, a complexidade é $O(n)$.
 
 #### Exercícios
 
@@ -413,14 +413,14 @@ Para encontrar um registro, usa-se a função *hash* na chave procurada para cal
 
 Caso se tenha *buckets* insuficientes para o volume de dados e/ou se tenha uma função *hash* que não realiza a distribuição uniforme dos registros entre os *buckets*, pode acontecer o estouro de *bucket*, que é quando se tem mais registros que compartilham o mesmo *hash* do que cabem em um *bucket*. A solução mais comum para esse problema é utilizar *buckets* de estouro, formando listas encadeadas de *buckets*.
 
-Com um número fixo de *buckets* (que se chama de *hash*ing estático), tem-se problemas semelhantes aos de uma tabela *hash* de tamanho fixo:
+Com um número fixo de *buckets* (que se chama de *hashing* estático), tem-se problemas semelhantes aos de uma tabela *hash* de tamanho fixo:
 - se esse número for muito pequeno, tem-se muitos estouros de *buckets*, reduzindo o desempenho.
 - se esse número for muito grande, tem-se desperdício de espaço.
 - se o número de registros no arquivo for muito dinâmico, não tem como calcular um bom número de *buckets*.
 
-A solução de se alterar e número de *buckets* e refazer todo o índice é geralmente considerada cara demais (ainda mais que o índice está em memória secundária). Outra solução é um *hash*ing dinâmico, como o *hashing extensível*.
+A solução de se alterar e número de *buckets* e refazer todo o índice é geralmente considerada cara demais (ainda mais que o índice está em memória secundária). Outra solução é um *hashing* dinâmico, como o *hashing extensível*.
 
-#### *hash*ing extensível
+#### *Hashing* extensível
 
 Nessa forma de *hash*, a função *hash* gera um valor contendo um certo número de bits (por exemplo, 32). Esse valor não é usado diretamente para endereçar um *bucket*.
 Em vez disso, usa-se o valor formado por alguns de seus bits menos (ou mais) significativos.

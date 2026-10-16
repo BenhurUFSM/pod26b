@@ -78,6 +78,11 @@ Os assuntos vistos em aula serão listados aqui.
 |   13 |  15set | busca em memória externa, índice multidimensional
 |   15 |  17set | busca em memória externa, índice multidimensional
 |   16 |  22set | compressão de dados
+|   17 |  24set | compressão de dados
+|   18 |  29set | compressão de dados
+|   19 |   1out | compressão de dados
+|   20 |   6out | compressão de dados
+|   21 |   8out | compressão de dados
 
 ## Exercícios, trabalhos
 
@@ -85,4 +90,5 @@ Os assuntos vistos em aula serão listados aqui.
 | ----: | --------: | :-----------
 | t1    | ~12~17ago | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)
 | t2    | 8set      | [medições de tempo de árvores binárias de busca](Trabalhos/t2)
+| t3    |           | [desempenho de compressores](Trabalhos/t3)
 

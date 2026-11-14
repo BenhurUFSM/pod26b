@@ -83,6 +83,16 @@ Os assuntos vistos em aula serão listados aqui.
 |   19 |   1out | compressão de dados
 |   20 |   6out | compressão de dados
 |   21 |   8out | compressão de dados
+|   22 |  20out | desenvolvimento dos trabalhos
+|   23 |  22out | desenvolvimento dos trabalhos
+|   24 |  27out | desenvolvimento dos trabalhos
+|   25 |   3nov | desenvolvimento dos trabalhos
+|   26 |   5nov | desenvolvimento dos trabalhos
+|   27 |  10nov | desenvolvimento dos trabalhos
+|   28 |  12nov | desenvolvimento dos trabalhos
+|   29 |  17nov | desenvolvimento dos trabalhos
+|   30 |  19nov | desenvolvimento dos trabalhos
+|   31 |  24nov | conversa final (sala 376, anexo B)
 
 ## Exercícios, trabalhos
 
@@ -90,5 +100,8 @@ Os assuntos vistos em aula serão listados aqui.
 | ----: | --------: | :-----------
 | t1    | ~12~17ago | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)
 | t2    | 8set      | [medições de tempo de árvores binárias de busca](Trabalhos/t2)
-| t3    |           | [desempenho de compressores](Trabalhos/t3)
+| t3    | 20nov     | [desempenho de compressores](Trabalhos/t3)
+|       |  3dez     | exame
 
+Para a entrega final, crie um diretório `entrega-final` no seu repositório git da disciplina, dentro um diretório para cada trabalho, com a versão final deles. Coloque também um texto de auto-avaliação, contendo uma sugestão de sua nota para a disciplina, justificada.
+Quando tiver pronto, envie um e-mail para o endereço da disciplina.

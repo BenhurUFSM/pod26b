@@ -100,7 +100,7 @@ Os assuntos vistos em aula serão listados aqui.
 | ----: | --------: | :-----------
 | t1    | ~12~17ago | [medições de tempo de algoritmos de ordenação](Trabalhos/t1.md)
 | t2    | 8set      | [medições de tempo de árvores binárias de busca](Trabalhos/t2)
-| t3    | 20nov     | [desempenho de compressores](Trabalhos/t3)
+| t3    | 20nov     | [desempenho de compressores](Trabalhos/t3.md)
 |       |  3dez     | exame
 
 Para a entrega final, crie um diretório `entrega-final` no seu repositório git da disciplina, dentro um diretório para cada trabalho, com a versão final deles. Coloque também um texto de auto-avaliação, contendo uma sugestão de sua nota para a disciplina, justificada.

@@ -106,4 +106,4 @@ Os assuntos vistos em aula serão listados aqui.
 Para a entrega final, crie um diretório `entrega-final` no seu repositório git da disciplina, dentro um diretório para cada trabalho, com a versão final deles. Coloque também um texto de auto-avaliação, contendo uma sugestão de sua nota para a disciplina, justificada.
 Quando tiver pronto, envie um e-mail para o endereço da disciplina.
 
-Prazo final da entrega, 27 de manhã. Vou precisar de conversa com quem entregar. Sugiro 27 de tarde, na sala 376. Tenho uma conversa as 14h com um aluno de outra turma.
+Prazo final da entrega, 27 de manhã. Vou precisar de conversa com quem entregar. Sugiro 27 de tarde, na sala 376. Tenho uma conversa as 14h com um aluno de outra turma. A conversa com o outro aluno foi transferida pras 15h. As conversas de POD serão à partir das 15h30.
